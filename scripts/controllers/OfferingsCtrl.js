@@ -31,7 +31,7 @@ angular.module('enrollmentFrontendApp')
     $scope.offerings = [
       {
         id:1,
-        date:'April 28',
+        date:'August 27',
         datetime: '2014-08-27',
         day: 'Monday',
         time: '1-2pm', 
@@ -40,59 +40,64 @@ angular.module('enrollmentFrontendApp')
         sponsor: 'ATEL',
         leader: 'Summers, Teggin',
         location: 'TBD',
-        expanded: false
+        expanded: false, 
+        description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems'
       },
       {
         id:2,
-        date:'April 28',
+        date:'August 28',
         datetime: '2014-08-28',
         day: 'Monday',
         time: '1-2pm', 
-        title: 'ePortfolio Student Showcase2',
+        title: 'Fieldtrip to the Future',
         theme: 'Engaging Learners',
         sponsor: 'ATEL',
-        leader: 'Summers, Teggin',
+        leader: 'G, Karen',
         location: 'TBD',
-        expanded: false
+        expanded: false, 
+        description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems'
       },
       {
         id:3,
-        date:'April 28',
+        date:'August 29',
         datetime: '2014-08-29',
         day: 'Monday',
         time: '1-2pm', 
-        title: 'ePortfolio Student Showcase3',
+        title: "Photoshoppin'",
         theme: 'Engaging Learners',
         sponsor: 'ATEL',
-        leader: 'Summers, Teggin',
+        leader: 'Walker, Jacques',
         location: 'TBD',
-        expanded: false
+        expanded: false, 
+        description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems'
       },
       {
         id:4,
-        date:'April 28',
+        date:'August 30',
         datetime: '2014-08-30',
         day: 'Monday',
         time: '1-2pm', 
-        title: 'ePortfolio Student Showcase4',
+        title: 'Scholar for Scholars',
         theme: 'Engaging Learners',
         sponsor: 'ATEL',
-        leader: 'Summers, Teggin',
+        leader: 'Pok, Dale',
         location: 'TBD',
-        expanded: false
+        expanded: false, 
+        description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems'
       },
       {
         id:5,
-        date:'April 28',
+        date:'August 31',
         datetime: '2014-08-31',
         day: 'Monday',
         time: '1-2pm', 
-        title: 'ePortfolio Student Showcase5',
+        title: "Yammerin'",
         theme: 'Engaging Learners',
         sponsor: 'ATEL',
-        leader: 'Summers, Teggin',
+        leader: 'English, Mary',
         location: 'TBD',
-        expanded: false
+        expanded: false, 
+        description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems'
       }      
     ];
 
