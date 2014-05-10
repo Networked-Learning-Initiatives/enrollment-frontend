@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('enrollmentFrontendApp')
-  .controller('OfferingsCtrl', function ($scope, $routeParams, ngTableParams, $filter, $rootScope) {
-  	// console.log($routeParams);
+  .controller('OfferingsCtrl', function ($scope, $routeParams, ngTableParams, $filter, $rootScope, $location, $timeout) {
+    console.log($routeParams);
+  	console.log($scope.searchQuery);
   	$scope.isActive = function(query) {
   		console.log(query);
   		console.log($routeParams.semester);
@@ -13,13 +14,19 @@ angular.module('enrollmentFrontendApp')
   		return false;
   	};
 
-    $scope.searchQuery = '';
+    // $scope.searchQuery = '';
+
+    $scope.select = function(offering) {
+      offering.expanded=!offering.expanded;
+      console.log(offering, $location.search());
+      $location.path('/offerings/'+$routeParams.year+'/'+$routeParams.semester+'/'+offering.id);
+      // $location.search('cheese');
+    };
 
     if ($routeParams.hasOwnProperty('query') && $routeParams.query.length > 0) {
       console.log($routeParams.query);
       $scope.searchQuery = $routeParams.query;
     }
-
 
     $scope.offerings = [
       {
@@ -33,6 +40,7 @@ angular.module('enrollmentFrontendApp')
         sponsor: 'ATEL',
         leader: 'Summers, Teggin',
         location: 'TBD',
+        expanded: false
       },
       {
         id:2,
@@ -45,6 +53,7 @@ angular.module('enrollmentFrontendApp')
         sponsor: 'ATEL',
         leader: 'Summers, Teggin',
         location: 'TBD',
+        expanded: false
       },
       {
         id:3,
@@ -57,6 +66,7 @@ angular.module('enrollmentFrontendApp')
         sponsor: 'ATEL',
         leader: 'Summers, Teggin',
         location: 'TBD',
+        expanded: false
       },
       {
         id:4,
@@ -69,20 +79,48 @@ angular.module('enrollmentFrontendApp')
         sponsor: 'ATEL',
         leader: 'Summers, Teggin',
         location: 'TBD',
+        expanded: false
       },
       {
-      	id:5,
-      	date:'April 28',
-      	datetime: '2014-08-31',
-      	day: 'Monday',
-      	time: '1-2pm', 
-      	title: 'ePortfolio Student Showcase5',
-      	theme: 'Engaging Learners',
-      	sponsor: 'ATEL',
-      	leader: 'Summers, Teggin',
-      	location: 'TBD',
+        id:5,
+        date:'April 28',
+        datetime: '2014-08-31',
+        day: 'Monday',
+        time: '1-2pm', 
+        title: 'ePortfolio Student Showcase5',
+        theme: 'Engaging Learners',
+        sponsor: 'ATEL',
+        leader: 'Summers, Teggin',
+        location: 'TBD',
+        expanded: false
       }      
     ];
+
+    $scope.filteredData = $scope.offerings;
+
+    function objIdxById(id, arr) {
+      for (var i=0; i<arr.length; i++) {
+        if (arr[i].id == id) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    if ($routeParams.hasOwnProperty('offeringid') && $routeParams.offeringid.length > 0) {
+      var idx = objIdxById($routeParams.offeringid, $scope.filteredData);
+      if (idx >= 0) {
+        $scope.select($scope.filteredData[idx]);
+        console.log($routeParams.offeringid);
+        $timeout(function(){
+          console.log('HEEEEEY');
+          console.log(angular.element('#'+$routeParams.offeringid));
+          console.log(angular.element('#'+$routeParams.offeringid)[0].offsetTop);
+          window.scrollTo(0,angular.element('#'+$routeParams.offeringid)[0].offsetTop+260);
+        }, 1);
+        // window.scrollTo(0,angular.element('#'+$routeParams.offeringid).offsetTop+260);
+      }
+    }
 
     $scope.tableParams = new ngTableParams({
       count: 1000,          // count per page
@@ -93,9 +131,9 @@ angular.module('enrollmentFrontendApp')
     	counts: [],
       total: $scope.offerings.length, 
       getData: function($defer, params) {
-        var filteredData = $scope.offerings;
+        $scope.filteredData = $scope.offerings;
         if ($scope.hasOwnProperty('searchQuery') && $scope.searchQuery.length>0) {
-          filteredData = $filter('filter')($scope.offerings,$scope.searchQuery, function(actual, expected) {
+          $scope.filteredData = $filter('filter')($scope.offerings,$scope.searchQuery, function(actual, expected) {
             // console.log(actual, expected);;
             var idx = actual.toString().toLowerCase().indexOf(expected);
             return idx > -1;
@@ -104,7 +142,7 @@ angular.module('enrollmentFrontendApp')
         // else { //maybe don't need else bc of assigning to offerings before filtering every time
 
         // } 
-        var orderedData = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
+        var orderedData = params.sorting() ? $filter('orderBy')($scope.filteredData, params.orderBy()) : $scope.filteredData;
 				$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
       }
     });

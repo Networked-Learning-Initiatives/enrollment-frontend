@@ -148,8 +148,48 @@ body {
 
 .nli-enrollment .offerings th {
   color: #117380;
+  text-align: left;
+}
+
+.nli-enrollment .offerings tr {
+  cursor: pointer;
+}
+
+.nli-enrollment .offerings td {
+  font-size: 18px;
+  border-top: none;
 }
 
 .nli-enrollment .navbar li {
   cursor: pointer;
+}
+
+.table-striped-bodies > tbody:nth-child(odd) > tr > td,
+.table-striped-bodies > tbody:nth-child(odd) > tr > th {
+  background-color: #fdf7ea;
+}
+
+.enrolled {
+  width: 300px;
+}
+
+.enrolled ul {
+  list-style-type: none;
+}
+
+.offerings img {
+  max-height: 45px;
+}
+
+.seats-available {
+  color: #117380;
+}
+
+.table-hover-bodies tbody:hover {
+  background-color: #fdebc8;
+}
+
+.table-striped-bodies > tbody:nth-child(odd):hover > tr > td,
+.table-striped-bodies > tbody:nth-child(odd):hover > tr > th {
+  background-color: #fdebc8;
 }

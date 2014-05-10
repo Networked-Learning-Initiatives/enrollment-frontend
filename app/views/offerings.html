@@ -1,12 +1,42 @@
 <div class="row offerings">
-  <table ng-table="tableParams" class="table table-striped table-hover">
-    <tr ng-repeat="offering in $data">
-      <td data-title="'Date'" sortable="'datetime'">{{offering.date}}<br />{{offering.day}}<br />{{offering.time}}</td>
-      <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
-      <td data-title="'Theme'" sortable="'theme'">{{offering.theme}}</td>
-      <td data-title="'Sponsor'" sortable="'sponsor'">{{offering.sponsor}}</td>
-      <td data-title="'Leader'" sortable="'leader'">{{offering.leader}}</td>
-      <td data-title="'Location'" sortable="'location'">{{offering.location}}</td>
-    </tr>
+  <table ng-table="tableParams" class="table table-striped-bodies table-hover-bodies">
+    <tbody ng-repeat="offering in $data" ng-click="select(offering)" id="{{offering.id}}">
+      <tr>
+        <td data-title="'Date'" sortable="'datetime'">{{offering.date}}<br />{{offering.day}}<br />{{offering.time}}</td>
+        <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
+        <td data-title="'Theme'" sortable="'theme'">{{offering.theme}}</td>
+        <td data-title="'Sponsor'" sortable="'sponsor'">{{offering.sponsor}}</td>
+        <td data-title="'Leader'" sortable="'leader'">{{offering.leader}}</td>
+        <td data-title="'Location'" sortable="'location'">{{offering.location}} <img src="images/webex.png" alt=""></td>
+      </tr>
+      <tr ng-class="{hidden:!offering.expanded}">
+        <td class="share-info" ng-click="share(offering)"><i class="fa fa-share"></i>Share this offering</td>
+        <td colspan="5">
+          {{offering.title}}
+          "So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems
+        </td>
+      </tr>
+      <tr ng-class="{hidden:!offering.expanded}">
+        <td></td>
+        <td class="enrolled">
+          <button class="btn btn-lg btn-primary pull-left">Enroll</button>
+          <div class="seats pull-left">
+            <ul>
+              <li class="seats-enrolled">13 enrolled</li>
+              <li class="seats-available">2 seats available</li>
+            </ul>
+            </div>
+        </td>
+        <td colspan="4" class="enrolled">
+          <button class="btn btn-lg btn-primary pull-left">Enroll in WebEx</button>
+          <div class="seats pull-left">
+          <ul>
+              <li class="seats-enrolled">13 enrolled</li>
+              <li class="seats-available">6 seats available</li>
+          </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
