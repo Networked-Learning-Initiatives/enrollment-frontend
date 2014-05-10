@@ -80,7 +80,7 @@ body {
 }
 
 .nli-enrollment .jumbotron {
-  background-image: url('/images/L_torg6.jpg');
+  background-image: url('../images/L_torg6.jpg');
   background-size: cover;
   background-position: center center;
   padding: 0;
