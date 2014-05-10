@@ -1,0 +1,12 @@
+<div class="row offerings">
+  <table ng-table="tableParams" class="table table-striped table-hover">
+    <tr ng-repeat="offering in $data">
+      <td data-title="'Date'" sortable="'datetime'">{{offering.date}}<br />{{offering.day}}<br />{{offering.time}}</td>
+      <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
+      <td data-title="'Theme'" sortable="'theme'">{{offering.theme}}</td>
+      <td data-title="'Sponsor'" sortable="'sponsor'">{{offering.sponsor}}</td>
+      <td data-title="'Leader'" sortable="'leader'">{{offering.leader}}</td>
+      <td data-title="'Location'" sortable="'location'">{{offering.location}}</td>
+    </tr>
+  </table>
+</div>

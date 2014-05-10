@@ -1,0 +1,163 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/ng-table/ng-table.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/nli-bs-theme.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+    <!-- endbuild -->
+  </head>
+  <body ng-app="enrollmentFrontendApp" class="nli-enrollment">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="header">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavCtrl">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://nli.tlos.vt.edu/">NLI</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li ng-class="{active:isActive('fall')}"><a href="#/offerings/2014/fall">Fall Offerings</a></li>
+              <li ng-class="{active:isActive('spring')}"><a href="#/offerings/2015/spring">Spring Offerings</a></li>
+              <li ng-class="{active:isActive('schedule')}"><a href="#/schedule">My Schedule</a></li>
+              <li ng-class="{active:isActive('transcript')}"><a href="#/transcript">My Transcript</a></li>
+              <li class="dropdown" ng-class="{active:isActive('computer')}">
+                <a class="dropdown-toggle" data-toggle="dropdown">Computer Refresh <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li ng-class="{active:isActive('computer/requirements')}"><a href="#/computer/requirements">Requirements</a></li>
+                  <li class="divider"></li>
+                  <li ng-class="{active:isActive('computer/catalog')}"><a href="#/computer/catalog">Computer Catalog</a></li>
+                  <!-- <li><a href="#">Separated link</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">One more separated link</a></li> -->
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#/help">Help</a></li>
+              <li><a href="#" class="text-danger">Logout <i class="fa fa-sign-out"></i></a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </div>
+
+    <div class="jumbotron">
+      <div class="container-fluid">
+        <div class="col-md-8">
+        <span class="quote pull-left">
+          "Whatever you are, be a good one."<br/>Abraham Lincoln
+        </span>
+        <span class="mission pull-left">
+          We aim to help you improve your teaching, research, and service.
+        </span>
+        <form class="form-forizontal course-search" role="search" ng-controller="SearchCtrl" ng-submit="search()">
+          <div class="form-group">
+            <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, etc." ng-model="searchQuery">
+            <button type="reset" class="btn btn-primary btn-sm pull-left" ng-click="searchQuery=''">Clear Search</button>
+            <!-- <button type="submit" class="btn btn-primary btn-sm pull-left">Submit Search</button> -->
+          </div>
+        </form>
+        </div>
+        <div class="col-md-4">
+          <article class="upcoming pull-right">
+            <h1 class="">Upcoming Offerings</h1>
+            <table class="table table-striped ">
+              <tr>
+                <td>Tues 3-4pm</td>
+                <td>Field Trip to the Future</td>
+              </tr>
+              <tr>
+                <td>Tues 3-4pm</td>
+                <td>Field Trip to the Future</td>
+              </tr>
+              <tr>
+                <td>Tues 3-4pm</td>
+                <td>Field Trip to the Future</td>
+              </tr>
+              <tr>
+                <td>Tues 3-4pm</td>
+                <td>Field Trip to the Future</td>
+              </tr>
+              <tr>
+                <td>Tues 3-4pm</td>
+                <td>Field Trip to the Future</td>
+              </tr>
+            </table>
+          </article>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Add your site or application content here -->
+    <div class="container-fluid" ng-view=""></div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/ng-table/ng-table.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/OfferingsCtrl.js"></script>
+        <script src="scripts/controllers/NavCtrl.js"></script>
+        <script src="scripts/controllers/CatalogCtrl.js"></script>
+        <script src="scripts/controllers/RequirementsCtrl.js"></script>
+        <script src="scripts/controllers/ScheduleCtrl.js"></script>
+        <script src="scripts/controllers/TranscriptCtrl.js"></script>
+        <script src="scripts/controllers/SearchCtrl.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

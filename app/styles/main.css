@@ -1,0 +1,155 @@
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+
+.nli-enrollment a.navbar-brand {
+  font-size: 62px;
+}
+
+.nli-enrollment .jumbotron {
+  background-image: url('/images/L_torg6.jpg');
+  background-size: cover;
+  background-position: center center;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.nli-enrollment .jumbotron .quote, .nli-enrollment .jumbotron .mission {
+  color: white;
+  background-color: rgba(0,0,0,0.2);
+  font-size: 40px;
+  font-weight: bold;
+  display: inline-block;
+  text-align: right;
+  line-height: 42px;
+}
+
+.nli-enrollment .jumbotron .mission {
+  margin-top: 80px;
+  font-size: 24px;
+  line-height: 26px;
+  font-weight: normal;
+  vertical-align: bottom;
+  text-align: left;
+}
+
+.nli-enrollment .course-search {
+  /*min-height: 200px;*/
+  padding-top: 205px;
+}
+
+.nli-enrollment .course-search .btn {
+  margin-left: 20px;
+}
+
+.nli-enrollment .course-search input {
+  width: 600px;
+  display: inline-block;
+}
+
+.nli-enrollment .upcoming {
+  margin: 20px 0;
+  box-shadow: 0 0 5px 3px #333;
+}
+
+.nli-enrollment .upcoming table {
+  width: 300px;
+  margin-bottom: 0;
+}
+
+.nli-enrollment .upcoming tr {
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.nli-enrollment .upcoming h1 {
+  width: 300px;
+  font-size: 18px;
+  background-color: #117380;
+  height: 32px;
+  color: white;
+  margin-bottom: 0;
+  /*padding-top: 6px;*/
+  margin-top: 0;
+}
+
+.nli-enrollment .offerings th {
+  color: #117380;
+}
+
+.nli-enrollment .navbar li {
+  cursor: pointer;
+}
