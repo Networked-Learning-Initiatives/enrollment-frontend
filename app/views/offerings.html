@@ -10,10 +10,9 @@
         <td data-title="'Location'" sortable="'location'">{{offering.location}} <img src="images/webex.png" alt=""></td>
       </tr>
       <tr ng-class="{hidden:!offering.expanded}">
-        <td class="share-info" ng-click="share(offering)"><i class="fa fa-share"></i>Share this offering</td>
+        <td class="share-info" ng-click="share(offering)"><a href=""><i class="fa fa-share share"></i>share</a></td>
         <td colspan="5">
-          {{offering.title}}
-          "So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems
+          {{offering.description}}
         </td>
       </tr>
       <tr ng-class="{hidden:!offering.expanded}">
@@ -27,7 +26,7 @@
             </ul>
             </div>
         </td>
-        <td colspan="4" class="enrolled">
+        <td colspan="2" class="enrolled">
           <button class="btn btn-lg btn-primary pull-left">Enroll in WebEx</button>
           <div class="seats pull-left">
           <ul>
@@ -35,6 +34,9 @@
               <li class="seats-available">6 seats available</li>
           </ul>
           </div>
+        </td>
+        <td colspan="2" class="credits">
+          Credits: {{offering.credits}}
         </td>
       </tr>
     </tbody>

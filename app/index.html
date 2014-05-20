@@ -71,22 +71,22 @@
 
     <div class="jumbotron">
       <div class="container-fluid">
-        <div class="col-md-8">
-        <span class="quote pull-left">
-          "Whatever you are, be a good one."<br/>Abraham Lincoln
-        </span>
-        <span class="mission pull-left">
-          We aim to help you improve your teaching, research, and service.
-        </span>
-        <form class="form-forizontal course-search" role="search" ng-controller="SearchCtrl" ng-submit="search()">
-          <div class="form-group">
-            <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, etc." ng-model="searchQuery">
-            <button type="reset" class="btn btn-primary btn-sm pull-left" ng-click="searchQuery=''">Clear Search</button>
-            <!-- <button type="submit" class="btn btn-primary btn-sm pull-left">Submit Search</button> -->
-          </div>
-        </form>
+        <div class="col-md-8 col-xs-12">
+          <span class="quote pull-left">
+            &ldquo;Whatever you are, be a good one.&rdquo;<br/>Abraham Lincoln
+          </span>
+          <span class="mission pull-left">
+            We aim to help you improve your teaching, research, and service.
+          </span>
+          <form class="form-forizontal course-search" role="search" ng-controller="SearchCtrl" ng-submit="search()">
+            <div class="form-group">
+              <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, themes, sponsors" ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}">
+              <button type="reset" class="btn btn-primary btn-sm pull-left" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
+              <!-- <button type="submit" class="btn btn-primary btn-sm pull-left">Submit Search</button> -->
+            </div>
+          </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 xs-hidden">
           <article class="upcoming pull-right">
             <h1 class="">Upcoming Offerings</h1>
             <table class="table table-striped ">
@@ -113,12 +113,14 @@
             </table>
           </article>
         </div>
-      </div>
-      
+      </div>      
     </div>
 
     <!-- Add your site or application content here -->
     <div class="container-fluid" ng-view=""></div>
+    <footer>
+      <a href="http://nli.tlos.vt.edu">NLI</a> is a division of Virginia Tech's <a href="http://tlos.vt.edu">TLOS: Technology-enhanced Learning and Online Strategies</a><a href="http://www.vt.edu/"><img src="images/VT_reverse_line_white_text_trans.png" alt="VT Logo" class="pull-right"></a>
+    </footer>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -151,8 +153,9 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/OfferingsCtrl.js"></script>
+        <script src="scripts/filters/AssocArrFilter.js"></script>
         <script src="scripts/controllers/NavCtrl.js"></script>
+        <script src="scripts/controllers/OfferingsCtrl.js"></script>
         <script src="scripts/controllers/CatalogCtrl.js"></script>
         <script src="scripts/controllers/RequirementsCtrl.js"></script>
         <script src="scripts/controllers/ScheduleCtrl.js"></script>
