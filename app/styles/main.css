@@ -80,7 +80,7 @@ body {
 }
 
 .nli-enrollment .jumbotron {
-  background-image: url('/images/L_torg6.jpg');
+  background-image: url('../images/L_torg6.jpg');
   background-size: cover;
   background-position: center center;
   padding: 0;
@@ -160,6 +160,10 @@ body {
   border-top: none;
 }
 
+.nli-enrollment .navbar {
+  box-shadow: 0 0 5px 3px #333;
+}
+
 .nli-enrollment .navbar li {
   cursor: pointer;
 }
@@ -192,4 +196,27 @@ body {
 .table-striped-bodies > tbody:nth-child(odd):hover > tr > td,
 .table-striped-bodies > tbody:nth-child(odd):hover > tr > th {
   background-color: #fdebc8;
+}
+
+.nli-enrollment footer {
+  height: 30px;
+  position: fixed;
+  bottom: 0;
+  background-color: #117380;
+  width: 100%;
+  color: white;
+  padding: 10px;
+  vertical-align: center;
+  line-height: 14px;
+  box-shadow: 0 0 5px 3px #333;
+}
+
+.nli-enrollment footer a {
+  color: white;
+  text-decoration: underline;
+}
+
+.nli-enrollment footer img {
+  max-height: 24px;
+  margin-top: -6px;
 }
