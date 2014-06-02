@@ -1,44 +1,67 @@
-<div class="row offerings">
-  <table ng-table="tableParams" class="table table-striped-bodies table-hover-bodies">
-    <tbody ng-repeat="offering in $data" ng-click="select(offering)" id="{{offering.id}}">
-      <tr>
-        <td data-title="'Date'" sortable="'datetime'">{{offering.date}}<br />{{offering.day}}<br />{{offering.time}}</td>
-        <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
-        <td data-title="'Theme'" sortable="'theme'">{{offering.theme}}</td>
-        <td data-title="'Sponsor'" sortable="'sponsor'">{{offering.sponsor}}</td>
-        <td data-title="'Leader'" sortable="'leader'">{{offering.leader}}</td>
-        <td data-title="'Location'" sortable="'location'">{{offering.location}} <img src="images/webex.png" alt=""></td>
-      </tr>
-      <tr ng-class="{hidden:!offering.expanded}">
-        <td class="share-info" ng-click="share(offering)"><a href=""><i class="fa fa-share share"></i>share</a></td>
-        <td colspan="5">
-          {{offering.description}}
-        </td>
-      </tr>
-      <tr ng-class="{hidden:!offering.expanded}">
-        <td></td>
-        <td class="enrolled">
-          <button class="btn btn-lg btn-primary pull-left">Enroll</button>
-          <div class="seats pull-left">
+<div class="jumbotron {{semester()}}">
+  <div class="container-fluid">
+    <div class="col-md-8 col-xs-12">
+      <span class="quote pull-left">
+        &ldquo;Whatever you are, be a good one.&rdquo;<br/>Abraham Lincoln
+      </span>
+      <span class="mission pull-left">
+        We aim to help you improve your teaching, research, and service.
+      </span>
+      <form class="form-forizontal course-search" role="search" ng-controller="SearchCtrl" ng-submit="search()">
+        <div class="form-group">
+          <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, themes, sponsors" ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}">
+          <button type="reset" class="btn btn-primary btn-sm pull-left" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4 xs-hidden">
+      <featured data="upcomingService.upcoming"></featured>
+    </div>
+  </div>      
+</div>
+<div class="container-fluid">
+  <div class="row offerings">
+    <table ng-table="tableParams" class="table table-striped-bodies table-hover-bodies">
+      <tbody ng-repeat="offering in $data" ng-click="select(offering)" id="{{offering.id}}">
+        <tr>
+          <td data-title="'Date'" sortable="'datetime'">{{offering.date}}<br />{{offering.day}}<br />{{offering.time}}</td>
+          <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
+          <td data-title="'Theme'" sortable="'theme'">{{offering.theme}}</td>
+          <td data-title="'Sponsor'" sortable="'sponsor'">{{offering.sponsor}}</td>
+          <td data-title="'Leader'" sortable="'leader'">{{offering.leader}}</td>
+          <td data-title="'Location'" sortable="'location'">{{offering.location}} <img src="images/webex.png" alt=""></td>
+        </tr>
+        <tr ng-class="{hidden:!offering.expanded}">
+          <td class="share-info" ng-click="share(offering)"><a href=""><i class="fa fa-share share"></i>share</a></td>
+          <td colspan="5">
+            {{offering.description}}
+          </td>
+        </tr>
+        <tr ng-class="{hidden:!offering.expanded}">
+          <td></td>
+          <td class="enrolled">
+            <button class="btn btn-lg btn-primary pull-left">Enroll</button>
+            <div class="seats pull-left">
+              <ul>
+                <li class="seats-enrolled">13 enrolled</li>
+                <li class="seats-available">2 seats available</li>
+              </ul>
+              </div>
+          </td>
+          <td colspan="2" class="enrolled">
+            <button class="btn btn-lg btn-primary pull-left">Enroll in WebEx</button>
+            <div class="seats pull-left">
             <ul>
-              <li class="seats-enrolled">13 enrolled</li>
-              <li class="seats-available">2 seats available</li>
+                <li class="seats-enrolled">13 enrolled</li>
+                <li class="seats-available">6 seats available</li>
             </ul>
             </div>
-        </td>
-        <td colspan="2" class="enrolled">
-          <button class="btn btn-lg btn-primary pull-left">Enroll in WebEx</button>
-          <div class="seats pull-left">
-          <ul>
-              <li class="seats-enrolled">13 enrolled</li>
-              <li class="seats-available">6 seats available</li>
-          </ul>
-          </div>
-        </td>
-        <td colspan="2" class="credits">
-          Credits: {{offering.credits}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          </td>
+          <td colspan="2" class="credits">
+            Credits: {{offering.credits}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

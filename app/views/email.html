@@ -1,17 +1,26 @@
-<div class="container-fluid transcript">
-  <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-9">
+<div class="jumbotron {{semester()}}">
+  <div class="container-fluid">
+    <div class="col-md-8 col-xs-12">
+      <span class="quote pull-left">
+        &ldquo;Whatever you are, be a good one.&rdquo;<br/>Abraham Lincoln
+      </span>
+      <span class="mission pull-left">
+        We aim to help you improve your teaching, research, and service.
+      </span>
       <form class="form-forizontal course-search" role="search" ng-controller="SearchCtrl" ng-submit="search()">
         <div class="form-group">
-          <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, etc." ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}">
+          <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, themes, sponsors" ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}">
           <button type="reset" class="btn btn-primary btn-sm pull-left" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
         </div>
       </form>
     </div>
-    <div class="col-md-3"></div>
-  </div>
-  <div class="row">
+    <div class="col-md-4 xs-hidden">
+      <featured data="upcomingService.upcoming"></featured>
+    </div>
+  </div>      
+</div>
+<div class="container-fluid">
+  <div class="row transcript">
     <table ng-table="tableParams" class="table table-striped table-hover">
       <tr ng-repeat="offering in $data">
         <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
@@ -22,8 +31,8 @@
         <td data-title="'Section Number'" sortable="'section'">{{offering.section}}</td>
         <td data-title="'Role'" sortable="'role'">{{offering.role}}</td>
         <td><a href="https://virginiatech.qualtrics.com/SE/?SID=SV_d4CLG9dOoCmS3Ot&sec={{offering.section}}" target="_blank" class="btn btn-primary" ng-if="offering.role == 'learner'">Evaluate</a></td>
-        <td><a href="#/roster/{{offering.section}}" class="btn btn-info" ng-if="offering.role != 'learner'">Roster</a></td>
-        <td><a href="#/attendance/{{offering.section}}" class="btn btn-success" ng-if="offering.role != 'learner'">Attendance</a></td>
+        <td><a href="#" target="_blank" class="btn btn-info" ng-if="offering.role != 'learner'">Roster</a></td>
+        <td><a href="#/attendance/{{offering.section}}" target="_blank" class="btn btn-success" ng-if="offering.role != 'learner'">Attendance</a></td>
         <td><a href="#" target="_blank" class="btn btn-warning" ng-if="offering.role != 'learner'">Email</a></td>
       </tr>
     </table>

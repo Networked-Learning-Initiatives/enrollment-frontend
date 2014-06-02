@@ -58,6 +58,21 @@ angular.module('enrollmentFrontendApp', [
         controller: 'HelpCtrl',
         reloadOnSearch: false
       })
+      .when('/attendance/:sectionId', {
+        templateUrl: 'views/attendance.html',
+        controller: 'AttendanceCtrl',
+        reloadOnSearch: false
+      })
+      .when('/roster/:sectionId', {
+        templateUrl: 'views/roster.html',
+        controller: 'RosterCtrl',
+        reloadOnSearch: false
+      })
+      .when('/email/:sectionId', {
+        templateUrl: 'views/email.html',
+        controller: 'EmailCtrl',
+        reloadOnSearch: false
+      })
       .otherwise({
         redirectTo: '/offerings/2014/fall' //this is too simplistic, make this based on when we are in the semester or something
       });

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
     <!-- endbuild -->
+    <title>NLI Enrollment System</title>
   </head>
   <body ng-app="enrollmentFrontendApp" class="nli-enrollment">
     <!--[if lt IE 7]>
@@ -62,62 +63,17 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#/help">Help</a></li>
-              <li><a href="#" class="text-danger">Logout <i class="fa fa-sign-out"></i></a></li>
+              <li ng-if="userService.loggedIn"><a ng-click="loginLogout()" class="text-danger">Logout <i class="fa fa-sign-out"></i></a></li>
+              <li ng-if="!userService.loggedIn"><a ng-click="loginLogout()" class="text-danger">Login <i class="fa fa-sign-in"></i></a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
       </nav>
     </div>
 
-    <div class="jumbotron">
-      <div class="container-fluid">
-        <div class="col-md-8 col-xs-12">
-          <span class="quote pull-left">
-            &ldquo;Whatever you are, be a good one.&rdquo;<br/>Abraham Lincoln
-          </span>
-          <span class="mission pull-left">
-            We aim to help you improve your teaching, research, and service.
-          </span>
-          <form class="form-forizontal course-search" role="search" ng-controller="SearchCtrl" ng-submit="search()">
-            <div class="form-group">
-              <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, themes, sponsors" ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}">
-              <button type="reset" class="btn btn-primary btn-sm pull-left" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
-              <!-- <button type="submit" class="btn btn-primary btn-sm pull-left">Submit Search</button> -->
-            </div>
-          </form>
-        </div>
-        <div class="col-md-4 xs-hidden">
-          <article class="upcoming pull-right">
-            <h1 class="">Upcoming Offerings</h1>
-            <table class="table table-striped ">
-              <tr>
-                <td>Tues 3-4pm</td>
-                <td>Field Trip to the Future</td>
-              </tr>
-              <tr>
-                <td>Tues 3-4pm</td>
-                <td>Field Trip to the Future</td>
-              </tr>
-              <tr>
-                <td>Tues 3-4pm</td>
-                <td>Field Trip to the Future</td>
-              </tr>
-              <tr>
-                <td>Tues 3-4pm</td>
-                <td>Field Trip to the Future</td>
-              </tr>
-              <tr>
-                <td>Tues 3-4pm</td>
-                <td>Field Trip to the Future</td>
-              </tr>
-            </table>
-          </article>
-        </div>
-      </div>      
-    </div>
-
     <!-- Add your site or application content here -->
-    <div class="container-fluid" ng-view=""></div>
+    <div ng-view=""></div>
+    
     <footer>
       <a href="http://nli.tlos.vt.edu">NLI</a> is a division of Virginia Tech's <a href="http://tlos.vt.edu">TLOS: Technology-enhanced Learning and Online Strategies</a><a href="http://www.vt.edu/"><img src="images/VT_reverse_line_white_text_trans.png" alt="VT Logo" class="pull-right"></a>
     </footer>
@@ -153,13 +109,19 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/directives/featured.js"></script>
+        <script src="scripts/services/user.js"></script>
+        <script src="scripts/services/upcoming.js"></script>
         <script src="scripts/controllers/NavCtrl.js"></script>
+        <script src="scripts/controllers/AttendanceCtrl.js"></script>
         <script src="scripts/controllers/OfferingsCtrl.js"></script>
         <script src="scripts/controllers/CatalogCtrl.js"></script>
         <script src="scripts/controllers/RequirementsCtrl.js"></script>
         <script src="scripts/controllers/ScheduleCtrl.js"></script>
         <script src="scripts/controllers/TranscriptCtrl.js"></script>
         <script src="scripts/controllers/SearchCtrl.js"></script>
+        <script src="scripts/controllers/RosterCtrl.js"></script>
+        <script src="scripts/controllers/EmailCtrl.js"></script>
         <!-- endbuild -->
 </body>
 </html>

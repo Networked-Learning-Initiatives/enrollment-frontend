@@ -1,13 +1,31 @@
-<div class="row schedule">
-  <table ng-table="tableParams" class="table table-striped table-hover">
-    <tr ng-repeat="offering in $data">
-      <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
-      <td data-title="'Start Date'" sortable="'startdt'">{{offering.start}}</td>
-      <td data-title="'End Date'" sortable="'enddt'">{{offering.end}}</td>
-      <td data-title="'Theme'" sortable="'theme'">{{offering.theme}}</td>
-      <td data-title="'Credits'" sortable="'credits'">{{offering.credits}}</td>
-      <td data-title="'Section Number'" sortable="'section'">{{offering.section}}</td>
-      <td><button class="btn btn-warning">Unenroll</button></td>
-    </tr>
-  </table>
+<div class="container-fluid schedule">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <form class="form-forizontal course-search" role="search" ng-controller="SearchCtrl" ng-submit="search()">
+        <div class="form-group">
+          <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, etc." ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}">
+          <button type="reset" class="btn btn-primary btn-sm pull-left" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  <div class="row">
+    <table ng-table="tableParams" class="table table-striped table-hover">
+      <tr ng-repeat="offering in $data">
+        <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
+        <td data-title="'Start Date'" sortable="'startdt'">{{offering.start}}</td>
+        <td data-title="'End Date'" sortable="'enddt'">{{offering.end}}</td>
+        <td data-title="'Theme'" sortable="'theme'">{{offering.theme}}</td>
+        <td data-title="'Credits'" sortable="'credits'">{{offering.credits}}</td>
+        <td data-title="'Section Number'" sortable="'section'">{{offering.section}}</td>
+        <td data-title="'Role'" sortable="'role'">{{offering.role}}</td>
+        <td><button class="btn btn-danger" ng-click="rm(offering.section)">Unenroll</button></td>
+        <td><a href="#/roster/{{offering.section}}" class="btn btn-info" ng-if="offering.role != 'learner'">Roster</a></td>
+        <td><a href="#/attendance/{{offering.section}}" class="btn btn-success" ng-if="offering.role != 'learner'">Attendance</a></td>
+        <td><a href="#/email/{{offering.section}}" class="btn btn-warning" ng-if="offering.role != 'learner'">Email</a></td>
+      </tr>
+    </table>
+  </div>
 </div>

@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '$routeParams', 'ngTableParams', '$filter', '$rootScope', '$location', '$timeout', function ($scope, $routeParams, ngTableParams, $filter, $rootScope, $location, $timeout) {
-  // console.log($routeParams);
-
+angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '$routeParams', 'ngTableParams', '$filter', '$rootScope', '$location', '$timeout', 'Upcoming', function ($scope, $routeParams, ngTableParams, $filter, $rootScope, $location, $timeout, Upcoming) {
   console.log($scope.searchQuery);
   $scope.currentOffering = [];
   $scope.isActive = function(query) {
@@ -14,6 +12,15 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
     }
     return false;
   };
+
+  $scope.semester = function() {
+    if ($routeParams.hasOwnProperty('semester')) {
+      return $routeParams.semester;
+    }
+    else {
+      return "fall";
+    }
+  }
 
   $scope.$on('$routeUpdate', function(scope, next, current) {
     console.log('route updated');
@@ -34,8 +41,8 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
     $scope.searchQuery = $routeParams.query;
   }
 
-  $scope.offerings = {
-    1: {
+  $scope.offerings = [
+    {
       id:1,
       date:'August 27',
       datetime: '2014-08-27',
@@ -50,7 +57,7 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
       description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
       credits: 1
     },
-    2: {
+    {
       id:2,
       date:'August 28',
       datetime: '2014-08-28',
@@ -65,7 +72,7 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
       description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
       credits: 1
     },
-    3: {
+    {
       id:3,
       date:'August 29',
       datetime: '2014-08-29',
@@ -80,7 +87,7 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
       description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
       credits: 1
     },
-    4: {
+    {
       id:4,
       date:'August 30',
       datetime: '2014-08-30',
@@ -95,7 +102,7 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
       description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
       credits: 1
     },
-    5: {
+    {
       id:5,
       date:'August 31',
       datetime: '2014-08-31',
@@ -110,7 +117,9 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
       description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
       credits: 1
     }      
-  };
+  ];
+
+  $scope.upcomingService = Upcoming;
 
   $scope.filteredData = $scope.offerings;
 
@@ -131,37 +140,23 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
       window.scrollTo(0,angular.element('#'+$routeParams.offering)[0].offsetTop+245);
     }, 1);
   }
-  
 
-  // if ($routeParams.hasOwnProperty('offeringid') && $routeParams.offeringid.length > 0) {
-  //   var idx = objIdxById($routeParams.offeringid, $scope.filteredData);
-  //   if (idx >= 0) {
-  //     $scope.select($scope.filteredData[idx]);
-  //     console.log($routeParams.offeringid);
-  //     $timeout(function(){
-  //       console.log('HEEEEEY');
-  //       console.log(angular.element('#'+$routeParams.offeringid));
-  //       console.log(angular.element('#'+$routeParams.offeringid)[0].offsetTop);
-  //       window.scrollTo(0,angular.element('#'+$routeParams.offeringid)[0].offsetTop+260);
-  //     }, 1);
-  //     // window.scrollTo(0,angular.element('#'+$routeParams.offeringid).offsetTop+260);
-  //   }
-  // }
-
-  function tableFilter (query, dict, ordering) {
-    var sortedResults = [];
-    for (var key in dict) {
-      if (dict.hasOwnProperty(key)) {
-        var item = dict[key];
-        for (var prop in item) {
-          if (item.hasOwnProperty(prop) && item[prop].toString().toLowerCase().indexOf(query.toLowerCase()) >= 0) {
-            sortedResults.push(item);
-            break;
-          }
+  function tableFilter (query, items) {
+    var filteredResults = [];
+    for (var i=0; i<items.length; i++) {
+      var item = items[i];
+      for (var prop in item) {
+        if (item.hasOwnProperty(prop) && item[prop].toString().toLowerCase().indexOf(query.toLowerCase()) >= 0) {
+          filteredResults.push(item);
+          break;
         }
       }
     }
-    return $filter('orderBy')(sortedResults, ordering);
+    console.log(filteredResults);
+    // console.log(ordering);
+    // var results = $filter('orderBy')(filteredResults, ordering);
+    // console.log(results);
+    return filteredResults;
   }
 
   $scope.tableParams = new ngTableParams({
@@ -177,22 +172,15 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
       $scope.filteredData = $scope.offerings;
       if ($scope.hasOwnProperty('searchQuery') && $scope.searchQuery.length>0) {
         console.log('gonna filter');
-        $scope.filteredData = tableFilter($scope.searchQuery, $scope.filteredData, params.orderBy());
-
-        // $scope.filteredData = $filter('filter')($scope.offerings,$scope.searchQuery, function(actual, expected) {
-        //   console.log(actual, expected);
-        //   var idx = actual.toString().toLowerCase().indexOf(expected);
-        //   return idx > -1;
-        // });          
+        $scope.filteredData = tableFilter($scope.searchQuery, $scope.filteredData, params.orderBy());    
       }
-      // else { //maybe don't need else bc of assigning to offerings before filtering every time
+      console.log($scope.filteredData);
+      console.log(params.sorting());
+      var orderedData = params.sorting() ? $filter('orderBy')($scope.filteredData, params.orderBy()) : $scope.filteredData;
+      console.log(orderedData);
+      // var orderedData = $scope.filteredData;
 
-      // } 
-      // var orderedData = params.sorting() ? $filter('orderBy')($scope.filteredData, params.orderBy()) : $scope.filteredData;
-      var orderedData = $scope.filteredData;
-      // console.log(orderedData);
       $defer.resolve(orderedData);
-      // $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
     }
   });
 

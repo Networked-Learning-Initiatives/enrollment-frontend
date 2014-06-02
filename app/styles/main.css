@@ -1,10 +1,12 @@
 /* Space out content a bit */
+
 body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
+
 .header,
 .marketing,
 .footer {
@@ -13,10 +15,13 @@ body {
 }
 
 /* Custom page header */
+
 .header {
   border-bottom: 1px solid #e5e5e5;
 }
+
 /* Make the masthead heading the same height as the navigation */
+
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -25,6 +30,7 @@ body {
 }
 
 /* Custom page footer */
+
 .footer {
   padding-top: 19px;
   color: #777;
@@ -32,51 +38,76 @@ body {
 }
 
 /* Customize container */
+
 @media (min-width: 768px) {
   .container {
     max-width: 730px;
   }
 }
+
 .container-narrow > hr {
   margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
+
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
 
 /* Supporting marketing content */
+
 .marketing {
   margin: 40px 0;
 }
+
 .marketing p + h4 {
   margin-top: 28px;
 }
 
 /* Responsive: Portrait tablets and up */
+
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
+
   .header,
   .marketing,
   .footer {
     padding-left: 0;
     padding-right: 0;
   }
+
   /* Space out the masthead */
+
   .header {
     margin-bottom: 30px;
   }
+
   /* Remove the bottom border on the jumbotron for visual effect */
+
   .jumbotron {
     border-bottom: 0;
   }
 }
 
-
 .nli-enrollment a.navbar-brand {
   font-size: 62px;
+}
+
+.nli-enrollment .jumbotron.fall {
+  background-image: url('../images/L_torg6.jpg');
+  background-position: center center;
+}
+
+.nli-enrollment .jumbotron.spring {
+  background-image: url('../images/L_torg3.jpg');
+  background-position: center 450px;
+}
+
+.nli-enrollment .jumbotron.summer {
+  background-image: url('../images/L_torg4.jpg');
+  background-position: center 400px;
 }
 
 .nli-enrollment .jumbotron {
@@ -87,7 +118,8 @@ body {
   margin-bottom: 0;
 }
 
-.nli-enrollment .jumbotron .quote, .nli-enrollment .jumbotron .mission {
+.nli-enrollment .jumbotron .quote,
+.nli-enrollment .jumbotron .mission {
   color: white;
   background-color: rgba(0,0,0,0.2);
   font-size: 40px;
@@ -95,10 +127,11 @@ body {
   display: inline-block;
   text-align: right;
   line-height: 42px;
+  margin-top: 20px;
 }
 
 .nli-enrollment .jumbotron .mission {
-  margin-top: 80px;
+  margin-top: 60px;
   font-size: 24px;
   line-height: 26px;
   font-weight: normal;
@@ -106,7 +139,7 @@ body {
   text-align: left;
 }
 
-.nli-enrollment .course-search {
+.nli-enrollment .jumbotron .course-search {
   /*min-height: 200px;*/
   padding-top: 205px;
 }
@@ -123,6 +156,11 @@ body {
 .nli-enrollment .upcoming {
   margin: 20px 0;
   box-shadow: 0 0 5px 3px #333;
+  max-width: 302px;
+}
+
+.nli-enrollment .upcoming .panel-body {
+  padding: 0;
 }
 
 .nli-enrollment .upcoming table {
@@ -146,7 +184,7 @@ body {
   margin-top: 0;
 }
 
-.nli-enrollment .offerings th {
+.nli-enrollment .offerings th, .nli-enrollment .transcript th, .nli-enrollment .schedule th {
   color: #117380;
   text-align: left;
 }
@@ -182,7 +220,7 @@ body {
 }
 
 .offerings img {
-  max-height: 45px;
+  max-height: 18px;
 }
 
 .seats-available {
@@ -219,4 +257,50 @@ body {
 .nli-enrollment footer img {
   max-height: 24px;
   margin-top: -6px;
+}
+
+.nli-enrollment .transcript th:nth-child(2), 
+.nli-enrollment .transcript th:nth-child(3), 
+.nli-enrollment .transcript th:nth-child(5), 
+.nli-enrollment .transcript th:nth-child(6),
+.nli-enrollment .transcript td:nth-child(2), 
+.nli-enrollment .transcript td:nth-child(3), 
+.nli-enrollment .transcript td:nth-child(5), 
+.nli-enrollment .transcript td:nth-child(6),
+.nli-enrollment .schedule th:nth-child(2), 
+.nli-enrollment .schedule th:nth-child(3), 
+.nli-enrollment .schedule th:nth-child(5), 
+.nli-enrollment .schedule th:nth-child(6),
+.nli-enrollment .schedule td:nth-child(2), 
+.nli-enrollment .schedule td:nth-child(3), 
+.nli-enrollment .schedule td:nth-child(5), 
+.nli-enrollment .schedule td:nth-child(6) {
+  text-align: right;
+}
+
+.nli-enrollment .transcript th:nth-child(2), 
+.nli-enrollment .transcript th:nth-child(3), 
+.nli-enrollment .transcript th:nth-child(5), 
+.nli-enrollment .transcript th:nth-child(6),
+.nli-enrollment .schedule th:nth-child(2), 
+.nli-enrollment .schedule th:nth-child(3), 
+.nli-enrollment .schedule th:nth-child(5), 
+.nli-enrollment .schedule th:nth-child(6) {
+  padding-right: 0;
+}
+
+.attendance .btn {
+  width:200px;
+  text-overflow: ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+  margin: 20px;
+}
+
+.attendance .btn i {
+  margin-right: 10px;
+}
+
+.roster dd {
+  text-indent: 20px;
 }

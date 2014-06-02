@@ -1,0 +1,13 @@
+<div class="container-fluid attendance">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{offering.title}} on {{offering.day}} {{offering.date}} {{offering.time}} with {{offering.leader}} in {{offering.location}}</h3>
+      </div>
+      <div class="panel-body">
+        <span class="bg-danger" ng-if="lonely()">No one is registered for this offering.</span>
+        <button class="btn btn-lg" ng-class="{'btn-success':person.present, 'btn-danger':!person.present}" ng-repeat="person in registered | orderBy:'lastName'" ng-click="person.present=!person.present"><i class="fa" ng-class="{'fa-times':!person.present, 'fa-check':person.present}"></i>{{person.firstName}} {{person.lastName}}</button>
+      </div>
+    </div>
+  </div>
+</div>

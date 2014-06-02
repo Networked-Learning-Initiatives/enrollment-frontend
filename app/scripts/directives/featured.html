@@ -1,0 +1,12 @@
+<div class="panel panel-primary upcoming pull-right">
+  <div class="panel-heading">
+    <h3 class="panel-title">Upcoming Offerings</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped ">
+      <tr ng-repeat="item in data | limitTo: 5">
+        <td ng-repeat="(key,val) in item">{{val}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
