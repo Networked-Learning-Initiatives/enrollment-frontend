@@ -12,10 +12,10 @@ angular.module('enrollmentFrontendApp').controller('ScheduleCtrl', ['$scope', '$
 
   $scope.searchQuery = '';
 
-  $scope.rm = function (sectionNumber) {
+  $scope.rm = function (offering) {
     var idx = -1;
     for (var i=0; i<$scope.schedule.length; i++) {
-      if ($scope.schedule[i].section == sectionNumber) {
+      if ($scope.schedule[i].section == offering.section) {
         idx = i;
         break;
       }
@@ -23,7 +23,7 @@ angular.module('enrollmentFrontendApp').controller('ScheduleCtrl', ['$scope', '$
     if (idx > -1) {
       console.log(idx);
       console.log($scope.schedule[idx]);
-      $scope.schedule.shift(idx,1);
+      $scope.schedule.splice(idx,1);
       console.log($scope.schedule[idx]);
       $scope.tableParams.reload();
     }

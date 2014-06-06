@@ -21,7 +21,7 @@
         <td data-title="'Credits'" sortable="'credits'">{{offering.credits}}</td>
         <td data-title="'Section Number'" sortable="'section'">{{offering.section}}</td>
         <td data-title="'Role'" sortable="'role'">{{offering.role}}</td>
-        <td><button class="btn btn-danger" ng-click="rm(offering.section)">Unenroll</button></td>
+        <td><button class="btn btn-danger" ng-click="rm(offering)">Unenroll</button></td>
         <td><a href="#/roster/{{offering.section}}" class="btn btn-info" ng-if="offering.role != 'learner'">Roster</a></td>
         <td><a href="#/attendance/{{offering.section}}" class="btn btn-success" ng-if="offering.role != 'learner'">Attendance</a></td>
         <td><a href="#/email/{{offering.section}}" class="btn btn-warning" ng-if="offering.role != 'learner'">Email</a></td>
