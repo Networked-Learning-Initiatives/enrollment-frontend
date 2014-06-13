@@ -1,15 +1,15 @@
 <div class="container-fluid transcript">
   <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-9">
-      <form class="form-forizontal course-search" role="search" ng-controller="SearchCtrl" ng-submit="search()">
+    <!-- <div class="col-md-3"></div> -->
+    <div class="col-md-12">
+      <form class="form-forizontal my-courses" role="search" ng-controller="SearchCtrl" ng-submit="search()">
         <div class="form-group">
           <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, etc." ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}">
-          <button type="reset" class="btn btn-primary btn-sm pull-left" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
+          <button type="reset" class="btn btn-primary btn-sm pull-left clear-search" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
         </div>
       </form>
     </div>
-    <div class="col-md-3"></div>
+    <!-- <div class="col-md-3"></div> -->
   </div>
   <div class="row">
     <table ng-table="tableParams" class="table table-striped table-hover">
