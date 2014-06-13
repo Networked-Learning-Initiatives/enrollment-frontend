@@ -144,13 +144,17 @@ body {
   padding-top: 205px;
 }
 
-.nli-enrollment .course-search .btn {
+.nli-enrollment .btn.clear-search {
   margin-left: 20px;
 }
 
-.nli-enrollment .course-search input {
+.nli-enrollment input {
   width: 600px;
   display: inline-block;
+}
+
+.nli-enrollment input.wide {
+  width: 708px;
 }
 
 .nli-enrollment .upcoming {
@@ -303,4 +307,14 @@ body {
 
 .roster dd {
   text-indent: 20px;
+}
+
+.my-courses {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  min-height: 30px;
+}
+
+.nli-enrollment .navbar-default .navbar-nav > li > a:hover, .nli-enrollment .navbar-default .navbar-nav > li > a:focus {
+  color: #cccccc;
 }
