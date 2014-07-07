@@ -1,11 +1,32 @@
 'use strict';
 
+var resolver = function(authRequired, elevatedRequired) {
+  return {
+    load: function($q, User, $window) {
+      console.log(User);
+      console.log(authRequired, elevatedRequired);
+      var deferred = $q.defer();
+      if (authRequired && User.loggedIn && (!elevatedRequired || (elevatedRequired && User.isElevated))) { // fire $routeChangeSuccess
+        deferred.resolve();
+        console.log('ACCESS GRANTED');
+        return deferred.promise;
+      } else { // fire $routeChangeError
+        console.log('THOU SHALT NOT PASS');
+        // deferred.reject("/login");
+        $window.location='/cas/login';
+        // return deferred.promise;
+      }
+    }
+  }
+}
+
 angular.module('enrollmentFrontendApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngTable'
+  'ngTable', 
+  'enrollmentFrontendUser'
 ])
   .config(function ($routeProvider) {
     $routeProvider

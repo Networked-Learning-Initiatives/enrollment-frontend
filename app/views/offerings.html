@@ -9,8 +9,9 @@
       </span>
       <form class="form-forizontal course-search" role="search" ng-controller="SearchCtrl" ng-submit="search()">
         <div class="form-group">
-          <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, themes, sponsors" ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}">
-          <button type="reset" class="btn btn-primary btn-sm pull-left" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
+          <label class="sr-only" for="offerin-search">search query for offerings</label>
+          <input type="text" class="form-control pull-left" placeholder="Search titles, leaders, themes, sponsors" ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}" id="offering-search">
+          <button type="reset" class="btn btn-primary btn-sm pull-left clear-search" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
         </div>
       </form>
     </div>

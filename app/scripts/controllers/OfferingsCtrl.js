@@ -1,7 +1,8 @@
 'use strict';
 
-angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '$routeParams', 'ngTableParams', '$filter', '$rootScope', '$location', '$timeout', 'Upcoming', function ($scope, $routeParams, ngTableParams, $filter, $rootScope, $location, $timeout, Upcoming) {
+angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '$routeParams', 'ngTableParams', '$filter', '$rootScope', '$location', '$timeout', '$http', 'Upcoming', function ($scope, $routeParams, ngTableParams, $filter, $rootScope, $location, $timeout, $http, Upcoming) {
   console.log($scope.searchQuery);
+  var offeringsCtrlScope = $scope;
   $scope.currentOffering = [];
   $scope.isActive = function(query) {
     console.log(query);
@@ -36,88 +37,108 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
     $location.search({offering:offering.id});
   };
 
-  if ($routeParams.hasOwnProperty('query') && $routeParams.query.length > 0) {
-    console.log($routeParams.query);
-    $scope.searchQuery = $routeParams.query;
+  function dataLoaded() {
+    selectOffering()
   }
 
-  $scope.offerings = [
-    {
-      id:1,
-      date:'August 27',
-      datetime: '2014-08-27',
-      day: 'Monday',
-      time: '1-2pm', 
-      title: 'ePortfolio Student Showcase1',
-      theme: 'Engaging Learners',
-      sponsor: 'ATEL',
-      leader: 'Summers, Teggin',
-      location: 'TBD',
-      expanded: false, 
-      description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
-      credits: 1
-    },
-    {
-      id:2,
-      date:'August 28',
-      datetime: '2014-08-28',
-      day: 'Tuesday',
-      time: '1-2pm', 
-      title: 'Fieldtrip to the Future',
-      theme: 'Engaging Learners',
-      sponsor: 'TEAL',
-      leader: 'G, Karen',
-      location: 'TBD',
-      expanded: false, 
-      description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
-      credits: 1
-    },
-    {
-      id:3,
-      date:'August 29',
-      datetime: '2014-08-29',
-      day: 'Wednesday',
-      time: '1-2pm', 
-      title: "Photoshoppin'",
-      theme: 'Engaging Learners',
-      sponsor: 'Libraries',
-      leader: 'Walker, Jacques',
-      location: 'TBD',
-      expanded: false, 
-      description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
-      credits: 1
-    },
-    {
-      id:4,
-      date:'August 30',
-      datetime: '2014-08-30',
-      day: 'Thursday',
-      time: '1-2pm', 
-      title: 'Scholar for Scholars',
-      theme: 'Engaging Learners',
-      sponsor: 'IT',
-      leader: 'Pokorski, Dale',
-      location: 'TBD',
-      expanded: false, 
-      description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
-      credits: 1
-    },
-    {
-      id:5,
-      date:'August 31',
-      datetime: '2014-08-31',
-      day: 'Friday',
-      time: '1-2pm', 
-      title: "Yammerin'",
-      theme: 'Engaging Learners',
-      sponsor: 'PBL',
-      leader: 'English, Mary',
-      location: 'TBD',
-      expanded: false, 
-      description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
-      credits: 1
-    }      
-  ];
+  function selectOffering() {
+    if ($routeParams.hasOwnProperty('query') && $routeParams.query.length > 0) {
+      console.log($routeParams.query);
+      offeringsCtrlScope.searchQuery = $routeParams.query;
+    }
+
+    if ($routeParams.hasOwnProperty('offering')) {
+      console.log($routeParams);
+      offeringsCtrlScope.offerings[objIdxById($routeParams.offering, offeringsCtrlScope.offerings)].expanded = true;
+      offeringsCtrlScope.currentOffering = offeringsCtrlScope.offerings[objIdxById($routeParams.offering, offeringsCtrlScope.offerings)];
+      $timeout(function(){
+        window.scrollTo(0,angular.element('#'+$routeParams.offering)[0].offsetTop+245);
+      }, 1);
+    }
+  }
+
+  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  
+
+  $scope.offerings = [];
+
+  function parseOfferings (responseObject) {
+    var parsedOfferings = [];
+    for (var i=0; i<responseObject.results.length; i++) {
+      console.log(responseObject.results[i]);
+      var date = new Date(responseObject.results[i].start_time);
+      var minutes = date.getMinutes();
+      if (minutes<10) {
+        minutes = '0'+minutes;
+      }
+      var themes = [];
+      for (var j=0; j<responseObject.results[i].section.course.themes.length; j++) {
+        themes.push(responseObject.results[i].section.course.themes[j].name)
+      }
+      var instructors = [];
+      for (var j=0; j<responseObject.results[i].section.instructors.length; j++) {
+        instructors.push(responseObject.results[i].section.instructors[j].last_name+', '+responseObject.results[i].section.instructors[j].first_name.substr(0,1) + '.');
+      }
+      var parsedLocation = 'N/A';
+      if (responseObject.results[i].hasOwnProperty('location') && responseObject.results[i].location != null && responseObject.results[i].location.hasOwnProperty('building')) {
+        parsedLocation = responseObject.results[i].location.building;
+        if (responseObject.results[i].location.hasOwnProperty('room_number')) {
+          parsedLocation += ' ' + responseObject.results[i].location.room_number;
+        }
+      }
+      var offering = {
+        id: responseObject.results[i].section.id,
+        date: months[date.getMonth()] + ' ' + date.getDate(),
+        datetime: date.getTime(),
+        day: days[date.getDay()],
+        time: date.getHours() + ':' + minutes,
+        title: responseObject.results[i].section.course.title,
+        theme: themes.join(', '),
+        sponsor: 'NLI',
+        leader: instructors.join(', '),
+        location: parsedLocation,
+        expanded: false,
+        description: responseObject.results[i].section.course.description.substr(0,50),
+        credits: responseObject.results[i].section.course.credit_count
+      };
+      parsedOfferings.push(offering);
+    }
+    return parsedOfferings;
+  }
+
+  function resultsSuccessCallback(data, status, headers, config) {
+    console.log('SUCCESSSS!');
+    console.log(data);
+    // this callback will be called asynchronously
+    // when the response is available
+    offeringsCtrlScope.response = data;
+    
+    var parsed = parseOfferings(offeringsCtrlScope.response);
+    if (offeringsCtrlScope.offerings.length < 1) {
+      offeringsCtrlScope.offerings = parseOfferings(offeringsCtrlScope.response);
+    }
+    else {
+      // var clone = offeringsCtrlScope.offerings.slice(0);
+      for (var i=0; i<parsed.length; i++) {
+        offeringsCtrlScope.offerings.push(parsed[i]);
+      }
+    }
+    console.log(offeringsCtrlScope.offerings);
+    offeringsCtrlScope.tableParams.reload();
+    if (data.hasOwnProperty('next') && data.next != null && data.next.length>0) {
+      $http({method: 'GET', url: data.next}).
+        success(resultsSuccessCallback).
+        error(function(data, status, headers, config) {
+          console.log('FAIL!');
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+    }
+    else {
+      dataLoaded();
+    }
+  }
 
   $scope.upcomingService = Upcoming;
 
@@ -132,15 +153,6 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
     return -1;
   }
 
-  if ($routeParams.hasOwnProperty('offering')) {
-    console.log($routeParams);
-    $scope.offerings[$routeParams.offering].expanded = true;
-    $scope.currentOffering = $scope.offerings[$routeParams.offering];
-    $timeout(function(){
-      window.scrollTo(0,angular.element('#'+$routeParams.offering)[0].offsetTop+245);
-    }, 1);
-  }
-
   function tableFilter (query, items) {
     var filteredResults = [];
     for (var i=0; i<items.length; i++) {
@@ -153,9 +165,6 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
       }
     }
     console.log(filteredResults);
-    // console.log(ordering);
-    // var results = $filter('orderBy')(filteredResults, ordering);
-    // console.log(results);
     return filteredResults;
   }
 
@@ -184,7 +193,14 @@ angular.module('enrollmentFrontendApp').controller('OfferingsCtrl', ['$scope', '
     }
   });
 
-  var offeringsCtrlScope = $scope;
+  $http({method: 'GET', url: '/meetings/', params:{year: $routeParams.year, semester: $scope.semester()}}).
+    success(resultsSuccessCallback).
+    error(function(data, status, headers, config) {
+      console.log('FAIL!');
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
+
   $rootScope.$on('query', function(evt, arg){
     console.log(arg);
     offeringsCtrlScope.searchQuery = arg;
