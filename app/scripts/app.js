@@ -10,17 +10,17 @@ angular.module('enrollmentFrontendApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/offerings/:year/:semester/:offeringid', {
-        templateUrl: 'views/offerings.html',
+        templateUrl: '/static/fe/views/offerings.html',
         controller: 'OfferingsCtrl',
         reloadOnSearch: false
       })
       .when('/offerings/:year/:semester', {
-        templateUrl: 'views/offerings.html',
+        templateUrl: '/static/fe/views/offerings.html',
         controller: 'OfferingsCtrl',
         reloadOnSearch: false
       })
       .when('/offerings/:year/:semester/search/:query', {
-        templateUrl: 'views/offerings.html',
+        templateUrl: '/static/fe/views/offerings.html',
         controller: 'OfferingsCtrl',
         reloadOnSearch: false
       })
@@ -34,42 +34,42 @@ angular.module('enrollmentFrontendApp', [
         }
       })
       .when('/schedule', {
-        templateUrl: 'views/schedule.html',
+        templateUrl: '/static/fe/views/schedule.html',
         controller: 'ScheduleCtrl',
         reloadOnSearch: false
       })
       .when('/transcript', {
-        templateUrl: 'views/transcript.html',
+        templateUrl: '/static/fe/views/transcript.html',
         controller: 'TranscriptCtrl',
         reloadOnSearch: false
       })
       .when('/computer/requirements', {
-        templateUrl: 'views/requirements.html',
+        templateUrl: '/static/fe/views/requirements.html',
         controller: 'RequirementsCtrl',
         reloadOnSearch: false
       })
       .when('/computer/catalog', {
-        templateUrl: 'views/catalog.html',
+        templateUrl: '/static/fe/views/catalog.html',
         controller: 'CatalogCtrl',
         reloadOnSearch: false
       })
       .when('/help', {
-        templateUrl: 'views/help.html',
+        templateUrl: '/static/fe/views/help.html',
         controller: 'HelpCtrl',
         reloadOnSearch: false
       })
       .when('/attendance/:sectionId', {
-        templateUrl: 'views/attendance.html',
+        templateUrl: '/static/fe/views/attendance.html',
         controller: 'AttendanceCtrl',
         reloadOnSearch: false
       })
       .when('/roster/:sectionId', {
-        templateUrl: 'views/roster.html',
+        templateUrl: '/static/fe/views/roster.html',
         controller: 'RosterCtrl',
         reloadOnSearch: false
       })
       .when('/email/:sectionId', {
-        templateUrl: 'views/email.html',
+        templateUrl: '/static/fe/views/email.html',
         controller: 'EmailCtrl',
         reloadOnSearch: false
       })

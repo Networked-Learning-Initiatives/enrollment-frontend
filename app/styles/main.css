@@ -96,22 +96,22 @@ body {
 }
 
 .nli-enrollment .jumbotron.fall {
-  background-image: url('../images/L_torg6.jpg');
+  background-image: url('/static/fe/images/L_torg6.jpg');
   background-position: center center;
 }
 
 .nli-enrollment .jumbotron.spring {
-  background-image: url('../images/L_torg3.jpg');
+  background-image: url('/static/fe/images/L_torg3.jpg');
   background-position: center 450px;
 }
 
 .nli-enrollment .jumbotron.summer {
-  background-image: url('../images/L_torg4.jpg');
+  background-image: url('/static/fe/images/L_torg4.jpg');
   background-position: center 400px;
 }
 
 .nli-enrollment .jumbotron {
-  background-image: url('../images/L_torg6.jpg');
+  background-image: url('/static/fe/images/L_torg6.jpg');
   background-size: cover;
   background-position: center center;
   padding: 0;

@@ -12,14 +12,14 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/ng-table/ng-table.css" />
+    <link rel="stylesheet" href="/static/fe/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/fe/bower_components/ng-table/ng-table.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <link rel="stylesheet" href="styles/nli-bs-theme.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/static/fe/styles/nli-bs-theme.css">
+    <link rel="stylesheet" href="/static/fe/styles/main.css">
+    <link rel="stylesheet" href="/static/fe/bower_components/fontawesome/css/font-awesome.css" />
     <!-- endbuild -->
     <title>NLI Enrollment System</title>
   </head>
@@ -75,7 +75,7 @@
     <div ng-view=""></div>
     
     <footer>
-      <a href="http://nli.tlos.vt.edu">NLI</a> is a division of Virginia Tech's <a href="http://tlos.vt.edu">TLOS: Technology-enhanced Learning and Online Strategies</a><a href="http://www.vt.edu/"><img src="images/VT_reverse_line_white_text_trans.png" alt="VT Logo" class="pull-right"></a>
+      <a href="http://nli.tlos.vt.edu">NLI</a> is a division of Virginia Tech's <a href="http://tlos.vt.edu">TLOS: Technology-enhanced Learning and Online Strategies</a><a href="http://www.vt.edu/"><img src="/static/fe/images/VT_reverse_line_white_text_trans.png" alt="VT Logo" class="pull-right"></a>
     </footer>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -90,38 +90,42 @@
     </script>
 
     <!--[if lt IE 9]>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <script src="/static/fe/bower_components/es5-shim/es5-shim.js"></script>
+    <script src="/static/fe/bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/ng-table/ng-table.js"></script>
+    <script src="/static/fe/bower_components/jquery/jquery.js"></script>
+    <script src="/static/fe/bower_components/angular/angular.js"></script>
+    <script src="/static/fe/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/static/fe/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/static/fe/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/static/fe/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/static/fe/bower_components/angular-route/angular-route.js"></script>
+    <script src="/static/fe/bower_components/ng-table/ng-table.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/directives/featured.js"></script>
-        <script src="scripts/services/user.js"></script>
-        <script src="scripts/services/upcoming.js"></script>
-        <script src="scripts/controllers/NavCtrl.js"></script>
-        <script src="scripts/controllers/AttendanceCtrl.js"></script>
-        <script src="scripts/controllers/OfferingsCtrl.js"></script>
-        <script src="scripts/controllers/CatalogCtrl.js"></script>
-        <script src="scripts/controllers/RequirementsCtrl.js"></script>
-        <script src="scripts/controllers/ScheduleCtrl.js"></script>
-        <script src="scripts/controllers/TranscriptCtrl.js"></script>
-        <script src="scripts/controllers/SearchCtrl.js"></script>
-        <script src="scripts/controllers/RosterCtrl.js"></script>
-        <script src="scripts/controllers/EmailCtrl.js"></script>
+        <script src="/static/fe/scripts/app.js"></script>
+        <script src="/static/fe/scripts/directives/featured.js"></script>
+        <script src="/static/fe/scripts/services/user.js"></script>
+        <script src="/static/fe/scripts/services/upcoming.js"></script>
+        <script src="/static/fe/scripts/controllers/NavCtrl.js"></script>
+        <script src="/static/fe/scripts/controllers/AttendanceCtrl.js"></script>
+        <script src="/static/fe/scripts/controllers/OfferingsCtrl.js"></script>
+        <script src="/static/fe/scripts/controllers/CatalogCtrl.js"></script>
+        <script src="/static/fe/scripts/controllers/RequirementsCtrl.js"></script>
+        <script src="/static/fe/scripts/controllers/ScheduleCtrl.js"></script>
+        <script src="/static/fe/scripts/controllers/TranscriptCtrl.js"></script>
+        <script src="/static/fe/scripts/controllers/SearchCtrl.js"></script>
+        <script src="/static/fe/scripts/controllers/RosterCtrl.js"></script>
+        <script src="/static/fe/scripts/controllers/EmailCtrl.js"></script>
         <!-- endbuild -->
+
+        <script>
+          window.userId = '{{request.user.id}}';
+        </script>
 </body>
 </html>
