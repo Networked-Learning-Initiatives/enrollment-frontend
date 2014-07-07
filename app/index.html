@@ -106,9 +106,9 @@
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/services/user.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/directives/featured.js"></script>
-        <script src="scripts/services/user.js"></script>
         <script src="scripts/services/upcoming.js"></script>
         <script src="scripts/controllers/NavCtrl.js"></script>
         <script src="scripts/controllers/AttendanceCtrl.js"></script>
@@ -121,5 +121,7 @@
         <script src="scripts/controllers/RosterCtrl.js"></script>
         <script src="scripts/controllers/EmailCtrl.js"></script>
         <!-- endbuild -->
+
+          {{request.user.id}}
 </body>
 </html>
