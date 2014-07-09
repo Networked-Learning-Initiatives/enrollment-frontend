@@ -408,10 +408,15 @@ app.factory('ngTableParams', ['$q', '$log', function ($q, $log) {
                 if (settings.groupBy) {
                     self.data = settings.$scope.$groups = data;
                 } else {
-                    self.data = settings.$scope.$data = data;
+                    self.data = data;
+                    if (settings.$scope){
+                        settings.$scope.$data = data;
+                    }
                 }
-                settings.$scope.pages = self.generatePagesArray(self.page(), self.total(), self.count());
-                settings.$scope.$emit('ngTableAfterReloadData');
+                if (settings.$scope) {
+                    settings.$scope.pages = self.generatePagesArray(self.page(), self.total(), self.count());
+                    settings.$scope.$emit('ngTableAfterReloadData');
+                }
             });
         };
 
