@@ -1,0 +1,16 @@
+<div class="panel panel-primary task">
+  <div class="panel-heading">
+    <h2 class="panel-title">{{model.title}}</h2>
+  </div>
+  <div class="panel-body">
+    <p>{{model.description}}</p>
+    <ol>
+      <li ng-repeat="step in model.steps">
+        {{step.content}}
+        <ol ng-if="step.steps.length > 0">
+          <li ng-repeat="substep in step.steps">{{substep}}</li>
+        </ol>
+      </li>
+    </ol>
+  </div>
+</div>

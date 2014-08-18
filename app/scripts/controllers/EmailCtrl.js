@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('enrollmentFrontendApp').controller('AttendanceCtrl', ['$scope', '$routeParams', 'ngTableParams', '$filter', '$rootScope', '$location', '$timeout', 'Upcoming', function ($scope, $routeParams, ngTableParams, $filter, $rootScope, $location, $timeout, Upcoming) {
+angular.module('enrollmentFrontendApp').controller('EmailCtrl', ['$scope', '$routeParams', 'ngTableParams', '$filter', '$rootScope', '$location', '$timeout', 'Upcoming', function ($scope, $routeParams, ngTableParams, $filter, $rootScope, $location, $timeout, Upcoming) {
   $scope.lonely = function() {
     return $scope.registered.length < 1;
   };

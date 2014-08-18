@@ -148,7 +148,7 @@ body {
   margin-left: 20px;
 }
 
-.nli-enrollment input {
+.nli-enrollment input[type="text"] {
   width: 600px;
   display: inline-block;
 }
@@ -191,10 +191,11 @@ body {
 .nli-enrollment .offerings th, .nli-enrollment .transcript th, .nli-enrollment .schedule th {
   color: #117380;
   text-align: left;
+  font-size: 16px;
 }
 
 .nli-enrollment .offerings tr {
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 
 .nli-enrollment .offerings td {
@@ -223,13 +224,17 @@ body {
   list-style-type: none;
 }
 
-.offerings img {
+.offerings img.webex {
   max-height: 18px;
 }
 
-.seats-available {
-  color: #117380;
+.offerings img.theme {
+  max-height: 30px;
 }
+
+/*.seats-available {
+  color: #117380;
+}*/
 
 .table-hover-bodies tbody:hover {
   background-color: #fdebc8;
@@ -273,12 +278,12 @@ body {
 .nli-enrollment .transcript td:nth-child(6),
 .nli-enrollment .schedule th:nth-child(2), 
 .nli-enrollment .schedule th:nth-child(3), 
-.nli-enrollment .schedule th:nth-child(5), 
-.nli-enrollment .schedule th:nth-child(6),
+.nli-enrollment .schedule th:nth-child(7), 
+.nli-enrollment .schedule th:nth-child(8),
 .nli-enrollment .schedule td:nth-child(2), 
 .nli-enrollment .schedule td:nth-child(3), 
-.nli-enrollment .schedule td:nth-child(5), 
-.nli-enrollment .schedule td:nth-child(6) {
+.nli-enrollment .schedule td:nth-child(7), 
+.nli-enrollment .schedule td:nth-child(8) {
   text-align: right;
 }
 
@@ -288,8 +293,8 @@ body {
 .nli-enrollment .transcript th:nth-child(6),
 .nli-enrollment .schedule th:nth-child(2), 
 .nli-enrollment .schedule th:nth-child(3), 
-.nli-enrollment .schedule th:nth-child(5), 
-.nli-enrollment .schedule th:nth-child(6) {
+.nli-enrollment .schedule th:nth-child(7), 
+.nli-enrollment .schedule th:nth-child(8) {
   padding-right: 0;
 }
 
@@ -359,3 +364,196 @@ body {
     display:block !important;
   }
 }
+
+.nli-enrollment .login-form input[type="password"], .nli-enrollment .login-form input[type="text"] {
+  width: 100%;
+  /*width: 600px;*/
+  /*display: inline-block;*/
+}
+
+.nli-enrollment .email-form .form-control {
+  width: 100%;  
+}
+
+.nli-enrollment .error-message {
+  color:red;
+}
+
+.nli-enrollment .theme-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.nli-enrollment ul.instructors {
+  list-style-type: none;
+  padding: 0;
+  display: inline;
+ }
+
+.nli-enrollment li.instructor {
+  display: inline;
+}
+
+.nli-enrollment .upcoming-link {
+  cursor: pointer;
+}
+
+li.instructor + li.instructor:before {
+  content: ", ";  
+}
+
+.email-form label.to-box {
+  display: block;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.nli-enrollment .upcoming-link .time {
+  text-align: right;
+}
+
+.nli-enrollment .upcoming-link .title {
+  text-align: left;
+}
+
+.nli-enrollment .leaders {
+  padding: 0;
+  list-style-type: none;
+}
+
+.nli-enrollment .offerings .ng-table th.sortable:nth-child(1) div {
+  width: 55px;
+}
+
+.nli-enrollment .offerings .ng-table th.sortable:nth-child(2) div {
+  width: 55px;
+}
+
+.nli-enrollment .offerings .ng-table th.sortable:nth-child(3) div {
+  width: 70px;
+}
+
+.nli-enrollment .offerings .ng-table th.sortable:nth-child(4) div {
+  width: 80px;
+}
+
+.nli-enrollment .offerings .ng-table th.sortable:nth-child(5) div {
+  width: 70px;
+}
+
+.nli-enrollment .offerings .ng-table th.sortable:nth-child(6) div {
+  width: 85px;
+}
+
+.nli-enrollment .offerings .ng-table td:nth-child(1) {
+  width: 140px;
+}
+
+.nli-enrollment .offerings .ng-table td:nth-child(2) {
+  width: 645px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(1) div {
+  width: 50px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(2) div {
+  width: 100px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(3) div {
+  width: 88px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(4) div {
+  width: 84px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(5) div {
+  width: 72px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(5) div:before, .nli-enrollment .schedule .ng-table th.sortable:nth-child(5) div:after {
+  top: 75%;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(6) div {
+  width: 68px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(7) div {
+  width: 72px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(8) div {
+  width: 85px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(9) div {
+  width: 78px;
+}
+
+.nli-enrollment .schedule .ng-table th.sortable:nth-child(10) div {
+  width: 54px;
+}
+
+.nli-enrollment .transcript .ng-table th.sortable:nth-child(1) div {
+  width: 50px;
+}
+
+.nli-enrollment .transcript .ng-table th.sortable:nth-child(2) div {
+  width: 100px;
+}
+
+.nli-enrollment .transcript .ng-table th.sortable:nth-child(3) div {
+  width: 88px;
+}
+
+.nli-enrollment .transcript .ng-table th.sortable:nth-child(4) div {
+  width: 68px;
+}
+
+.nli-enrollment .transcript .ng-table th.sortable:nth-child(5) div {
+  width: 72px;
+}
+
+.nli-enrollment .transcript .ng-table th.sortable:nth-child(6) div {
+  width: 85px;
+}
+
+.nli-enrollment .transcript .ng-table th.sortable:nth-child(7) div {
+  width: 78px;
+}
+
+.nli-enrollment .transcript .ng-table th.sortable:nth-child(8) div {
+  width: 54px;
+}
+
+/*.nli-enrollment .offerings .ng-table td:nth-child(3) {
+  width: 65px;
+}
+
+.nli-enrollment .offerings .ng-table td:nth-child(4) {
+  width: 75px;
+}
+
+.nli-enrollment .offerings .ng-table td:nth-child(5) {
+  width: 65px;
+}*/
+
+.nli-enrollment .offerings .ng-table td:nth-child(6) {
+  width: 160px;
+}
+
+.nli-enrollment .offerings .seats {
+  clear: left;
+}
+
+.nli-enrollment .offerings .seats ul {
+  padding: 0;
+}
+
+tr.upcoming-link:hover {
+  color: #158d9d;
+}
+

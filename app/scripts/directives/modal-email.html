@@ -1,0 +1,59 @@
+<div class="modal fade email-form" id="email-modal" tabindex="-1" role="dialog" aria-labelledby="Email" aria-hidden="true" data-keyboard="false" data-backgrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="email-modal-label">Email</h4>
+      </div>
+      <form role="form" id="modal-email-form" ng-submit="emailFromModal()">
+        <div class="modal-body">
+          <div class="form-group">
+            <fieldset form="modal-email-form" name="to">
+              <legend>To:</legend>
+                <label>
+                  <input type="checkbox" ng-click="toggleToAll()" checked="true"> All Participants (Instructors, Coordinators,  Learners, and Waitlist)
+                </label>
+                <h5>Instructors</h5>
+                  <label class="to-box" ng-repeat="instructor in instructors">
+                    <input type="checkbox" name="emailees" value="{{instructor.email}}" ng-model="instructor.selected"> 
+                    <input type="hidden" name="emaileeids" value="{{instructor.id}}">
+                    {{instructor.first_name}} {{instructor.last_name}} &lt;{{instructor.email}}&gt;
+                  </label>
+                <h5>Coordinators</h5>
+                  <label class="to-box" ng-repeat="coordinator in coordinators">
+                    <input type="checkbox" name="emailees" value="{{coordinator.email}}" ng-click="toggle(coordinator.id, coordinator.selected)" ng-model="coordinator.selected"> 
+                    <input type="hidden" name="emaileeids" value="{{coordinator.id}}">
+                    {{coordinator.first_name}} {{coordinator.last_name}} &lt;{{coordinator.email}}&gt;
+                  </label>
+                <h5>Learners</h5>
+                  <label class="to-box" ng-repeat="learner in learners">
+                    <input type="checkbox" name="emailees" value="{{learner.email}}" ng-model="learner.selected"> 
+                    <input type="hidden" name="emaileeids" value="{{learner.id}}">
+                    {{learner.first_name}} {{learner.last_name}} &lt;{{learner.email}}&gt;
+                  </label>
+                <h5>Waitlist</h5>
+                  <label class="to-box" ng-repeat="learner in waitlisted">
+                    <input type="checkbox" name="emailees" value="{{learner.email}}" ng-model="learner.selected"> 
+                    <input type="hidden" name="emaileeids" value="{{learner.id}}">
+                    {{learner.first_name}} {{learner.last_name}} &lt;{{learner.email}}&gt;
+                  </label>
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="email-subject">Subject</label>
+            <input type="text" class="form-control" id="email-subject" placeholder="Subject" name="mailsubject" ng-model="subject">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="email-body">Body</label>
+            <textarea rows="10" class="form-control" id="email-body" placeholder="Enter your message here" name="mailcontent" ng-model="body"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="close-modal-email" ng-click="close()">Cancel</button>
+          <input ng-show="recipients.length>0" type="submit" class="btn btn-primary" value="Send"></input>
+          <input ng-show="recipients.length==0" disabled type="submit" class="btn btn-primary" value="Send"></input>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

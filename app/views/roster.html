@@ -22,7 +22,7 @@
                 <dt>Credits</dt>
                 <dd>{{offering.credits}}</dd>
                 <dt>Theme</dt>
-                <dd>{{offering.theme}}</dd>
+                <dd><ul class="theme-list"><li ng-repeat="theme in offering.themes">{{theme.name}}</li></ul></dd>
                 <dt>Sponsor</dt>
                 <dd>{{offering.sponsor}}</dd>
               </dl>
@@ -50,13 +50,12 @@
   </div>
   <div class="row">
     <table ng-table="tableParams" class="table table-striped table-hover">
-      <tr ng-repeat="attendee in $data">
-        <td data-title="'First Name'" sortable="'firstName'">{{attendee.firstName}}</td>
-        <td data-title="'Last Name'" sortable="'lastName'">{{attendee.lastName}}</td>
-        <td data-title="'PID'" sortable="'pid'">{{attendee.pid}}</td>
-        <td data-title="'Department'" sortable="'dept'">{{attendee.dept}}</td>
-        <td data-title="'Online'" sortable="'online'">{{attendee.online}}</td>
-        <td data-title="'Waitlisted'" sortable="'waitlisted'">{{attendee.waitlisted}}</td>
+      <tr ng-repeat="enrollment in $data">
+        <td data-title="'First Name'" sortable="'user.first_name'">{{enrollment.user.first_name}}</td>
+        <td data-title="'Last Name'" sortable="'user.last_name'">{{enrollment.user.last_name}}</td>
+        <td data-title="'PID'" sortable="'user.vt_data'">{{enrollment.user.vt_data}}</td>
+        <td data-title="'Online'" sortable="'online'">{{enrollment.online}}</td>
+        <td data-title="'Waitlisted'" sortable="'waitlisted'">{{enrollment.waitlisted}}</td>
       </tr>
     </table>
   </div>

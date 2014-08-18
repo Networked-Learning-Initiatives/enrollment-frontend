@@ -4,8 +4,10 @@
   </div>
   <div class="panel-body">
     <table class="table table-striped ">
-      <tr ng-repeat="item in data | limitTo: 5">
-        <td ng-repeat="(key,val) in item">{{val}}</td>
+      <!-- <tr class="upcoming-link" ng-repeat="item in upcoming | limitTo: 5" ng-click="select(item.id)"> -->
+      <tr class="upcoming-link" ng-repeat="item in upcoming | limitTo: 5">
+        <td class="time"><a ng-href="#/offerings/2014/fall?offering={{item.id}}" ng-click="select(item.id)">{{item.meetingTime}}</a></td>
+        <td class="title"><a ng-href="#/offerings/2014/fall?offering={{item.id}}" ng-click="select(item.id)">{{item.title}}</a></td>
       </tr>
     </table>
   </div>

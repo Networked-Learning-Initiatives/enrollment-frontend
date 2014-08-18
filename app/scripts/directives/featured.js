@@ -1,15 +1,24 @@
 'use strict';
-angular.module('enrollmentFrontendApp').directive('featured', ['$rootScope', function ($rootScope){
+angular.module('enrollmentOfferings').directive('featured', ['Upcoming', 'Time', '$location', '$rootScope', function (Upcoming, Time, $location, $rootScope){
   return {
     restrict: 'E',
     replace: true,
-    templateUrl: 'scripts/directives/featured.html',
+    templateUrl: '/static/fe/scripts/directives/featured.html',
     scope: {
-      data: '='
     },
     link: function(scope, element, attrs) {
-      // console.log('linking featured');
-      // console.log(scope.data);
+      var t = Time.semestYear();
+      scope.year = t.year;
+      scope.semester = t.semester;
+      scope.select = function(id) {
+        console.log('featured, select: ', id);
+        $rootScope.$emit('select-offering', id);
+      };
+      console.log('about to get upcoming');
+      Upcoming.getUpcoming(scope.year, scope.semester, function(data){
+        console.log('got upcoming', data);
+        scope.upcoming = data;
+      });
     }
   };
 }]);

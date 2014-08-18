@@ -12,7 +12,7 @@ angular.module('enrollmentFrontendApp').controller('SearchCtrl', function ($scop
 	// });
 
 	$rootScope.$on('$routeChangeSuccess', function(scope, next, current) {
-		console.log('$routeChangeSuccess detected in SearchCtrl');
+		// console.log('$routeChangeSuccess detected in SearchCtrl', scope, next, current);
 		$scope.searchQuery='';
 	});
 

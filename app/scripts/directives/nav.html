@@ -1,0 +1,51 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavCtrl">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://nli.tlos.vt.edu/">NLI</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ng-class="{active:isActive('fall')}"><a href="#/offerings/2014/fall">Fall Offerings</a></li>
+        <li ng-class="{active:isActive('spring')}"><a href="#/offerings/2015/spring">Spring Offerings</a></li>
+
+        
+        <li ng-if="userService.loggedIn()" ng-class="{active:isActive('schedule')}"><a title="My Schedule" href="#/schedule">My Schedule</a></li>
+        
+        <li ng-if="!userService.loggedIn()" ng-class="{active:isActive('schedule')}"><a title="My Schedule" ng-href="/api/login/?return_path={{window.location.origin+'#/schedule'}}">My Schedule <i class="fa fa-lock" ng-hide="userService.loggedIn()"></i></a></li>
+        
+        <li ng-if="userService.loggedIn()" ng-class="{active:isActive('transcript')}"><a title="My Transcript" href="#/transcript">My Transcript</a></li>
+        
+        <!-- <li ng-if="!userService.loggedIn()" ng-class="{active:isActive('transcript')}" ng-click="login('#/transcript')"><a href="#">My Transcript <i class="fa fa-lock" ng-hide="userService.loggedIn()"></i></a></li> -->
+        <li ng-if="!userService.loggedIn()" ng-class="{active:isActive('transcript')}"><a title="My Transcript" ng-href="/api/login/?return_path={{window.location.origin+'#/transcript'}}">My Transcript <i class="fa fa-lock" ng-hide="userService.loggedIn()"></i></a></li>
+        
+
+        <li class="dropdown" ng-class="{active:isActive('computer')}">
+          <a class="dropdown-toggle" data-toggle="dropdown" ng-class="{active:isActive('computer/requirements') || isActive('computer/catalog')}">Computer Refresh <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li ng-class="{active:isActive('computer/requirements')}"><a href="#/computer/requirements">Requirements</a></li>
+            <li class="divider"></li>
+            <li ng-class="{active:isActive('computer/catalog')}"><a href="#/computer/catalog">Computer Catalog</a></li>
+            <!-- <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li> -->
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#/help">Help</a></li>
+        <li ng-show="userService.loggedIn()"><a ng-click="logout()" class="text-danger">Logout <i class="fa fa-sign-out"></i></a></li>
+        <li ng-hide="userService.loggedIn()"><a ng-click="login()" class="text-danger">Guest Login <i class="fa fa-sign-in"></i></a></li>
+        <li ng-hide="userService.loggedIn()"><a href="/cas/login/" class="text-danger">Login <i class="fa fa-sign-in"></i></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

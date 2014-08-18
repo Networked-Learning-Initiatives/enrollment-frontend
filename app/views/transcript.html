@@ -19,12 +19,13 @@
         <td data-title="'End Date'" sortable="'enddt'">{{offering.end}}</td>
         <td data-title="'Leader'" sortable="'leader'">{{offering.leader}}</td>
         <td data-title="'Credits'" sortable="'credits'">{{offering.credits}}</td>
-        <td data-title="'Section Number'" sortable="'section'">{{offering.section}}</td>
+        <td data-title="'Section'" sortable="'section.id'">{{offering.section.id}}</td>
+        <td data-title="'Leaders'" sortable="'leader'">{{meeting.leader}}</td>
         <td data-title="'Role'" sortable="'role'">{{offering.role}}</td>
-        <td><a href="https://virginiatech.qualtrics.com/SE/?SID=SV_d4CLG9dOoCmS3Ot&sec={{offering.section}}" target="_blank" class="btn btn-primary" ng-if="offering.role == 'learner'">Evaluate</a></td>
-        <td><a href="#/roster/{{offering.section}}" class="btn btn-info" ng-if="offering.role != 'learner'">Roster</a></td>
-        <td><a href="#/attendance/{{offering.section}}" class="btn btn-success" ng-if="offering.role != 'learner'">Attendance</a></td>
-        <td><a href="#" target="_blank" class="btn btn-warning" ng-if="offering.role != 'learner'">Email</a></td>
+        <td><a href="https://virginiatech.qualtrics.com/SE/?SID=SV_d4CLG9dOoCmS3Ot&sec={{offering.section.id}}" target="_blank" class="btn btn-primary" ng-if="offering.role == 'learner'">Evaluate</a></td>
+        <td><a href="#/roster/{{offering.section.id}}" class="btn btn-info" ng-if="offering.role != 'learner'">Roster</a></td>
+        <td><a href="#/attendance/{{offering.id}}" class="btn btn-success" ng-if="offering.role != 'learner'">Attendance</a></td>
+        <td><button class="btn btn-warning" ng-if="meeting.role != 'learner'" ng-click="email(offering.section)">Email</button></td>
       </tr>
     </table>
   </div>

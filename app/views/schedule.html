@@ -3,6 +3,7 @@
     <div class="col-md-12">
       <form class="form-forizontal my-courses" role="search" ng-controller="SearchCtrl" ng-submit="search()">
         <div class="form-group">
+
           <input type="text" class="form-control pull-left" placeholder="Search my schedule" ng-model="searchQuery" ng-class="{wide:searchQuery.length==0}">
           <button type="reset" class="btn btn-primary btn-sm pull-left clear-search" ng-click="searchQuery=''" ng-class="{hidden:searchQuery.length==0}">Clear Search</button>
         </div>
@@ -10,19 +11,23 @@
     </div>
   </div>
   <div class="row">
+    <p>{{User.id}}</p>
     <table ng-table="tableParams" class="table table-striped table-hover">
-      <tr ng-repeat="offering in $data">
-        <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
-        <td data-title="'Start Date'" sortable="'startdt'">{{offering.start}}</td>
-        <td data-title="'End Date'" sortable="'enddt'">{{offering.end}}</td>
-        <td data-title="'Theme'" sortable="'theme'">{{offering.theme}}</td>
-        <td data-title="'Credits'" sortable="'credits'">{{offering.credits}}</td>
-        <td data-title="'Section Number'" sortable="'section'">{{offering.section}}</td>
-        <td data-title="'Role'" sortable="'role'">{{offering.role}}</td>
-        <td><button class="btn btn-danger" ng-click="rm(offering)">Unenroll</button></td>
-        <td><a href="#/roster/{{offering.section}}" class="btn btn-info" ng-if="offering.role != 'learner'">Roster</a></td>
-        <td><a href="#/attendance/{{offering.section}}" class="btn btn-success" ng-if="offering.role != 'learner'">Attendance</a></td>
-        <td><a href="#/email/{{offering.section}}" class="btn btn-warning" ng-if="offering.role != 'learner'">Email</a></td>
+      <tr ng-repeat="meeting in $data">
+        <td data-title="'Title'" sortable="'title'">{{meeting.title}}</td>
+        <td data-title="'Start Date'" sortable="'startdt'">{{meeting.start}}</td>
+        <td data-title="'End Date'" sortable="'enddt'">{{meeting.end}}</td>
+        <td data-title="'Location'" sortable="'location'">{{meeting.location}} <img ng-show="meeting.maxOnline > 0 && meeting.async=='Live'" class="webex" src="/static/fe/images/webex.png" alt=""></td>
+          <td data-title="'Online Format'" sortable="'async'">{{meeting.async}}</td>
+        <td data-title="'Theme'" sortable="'theme'">{{meeting.theme}}</td>
+        <td data-title="'Credits'" sortable="'credits'">{{meeting.credits}}</td>
+        <td data-title="'Section'" sortable="'section.id'">{{meeting.section.id}}</td>
+        <td data-title="'Leaders'" sortable="'leader'">{{meeting.leader}}</td>
+        <td data-title="'Role'" sortable="'role'">{{meeting.role}}</td>
+        <td><button class="btn btn-danger" ng-click="rm(meeting, $index)">Unenroll</button></td>
+        <td><a href="#/roster/{{meeting.section.id}}" class="btn btn-info" ng-if="meeting.role != 'learner'">Roster</a></td>
+        <td><a href="#/attendance/{{meeting.id}}" class="btn btn-success" ng-if="meeting.role != 'learner'">Attendance</a></td>
+        <td><button class="btn btn-warning" ng-if="meeting.role != 'learner'" ng-click="email(meeting.section)">Email</button></td>
       </tr>
     </table>
   </div>

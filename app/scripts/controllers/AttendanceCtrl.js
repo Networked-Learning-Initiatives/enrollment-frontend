@@ -1,71 +1,109 @@
 'use strict';
 
-angular.module('enrollmentFrontendApp').controller('AttendanceCtrl', ['$scope', '$routeParams', 'ngTableParams', '$filter', '$rootScope', '$location', '$timeout', 'Upcoming', function ($scope, $routeParams, ngTableParams, $filter, $rootScope, $location, $timeout, Upcoming) {
+angular.module('enrollmentFrontendApp').controller('AttendanceCtrl', ['$scope', '$routeParams', 'ngTableParams', '$filter', '$rootScope', '$location', '$timeout', 'Upcoming', '$http', '$cookies', function ($scope, $routeParams, ngTableParams, $filter, $rootScope, $location, $timeout, Upcoming, $http, $cookies) {
   $scope.lonely = function() {
     return $scope.registered.length < 1;
   };
 
-  $scope.registered = [
-    {
-      firstName: 'Steve',
-      lastName: 'Harrison',
-      present: false
-    },
-    {
-      firstName: 'Deborah',
-      lastName: 'Tatar',
-      present: false
-    },
-    {
-      firstName: 'Shelli',
-      lastName: 'Fowler',
-      present: false
-    },
-    {
-      firstName: 'Mary',
-      lastName: 'English',
-      present: true
-    },
-    {
-      firstName: 'Jacques',
-      lastName: 'Walker',
-      present: false
-    },
-    {
-      firstName: 'Shannon',
-      lastName: 'Lipscomb',
-      present: false
-    },
-    {
-      firstName: 'Dan',
-      lastName: 'Yaffe',
-      present: true
-    },
-    {
-      firstName: 'Ben',
-      lastName: 'Knapp',
-      present: false
-    },
-    {
-      firstName: 'Michael',
-      lastName: 'Stewart',
-      present: false
-    }
-  ];
+  var attendanceCtrlScope = $scope;
+  var meetingId = $routeParams.meetingId;
 
-  $scope.offering = {
-    id:1,
-    date:'August 27',
-    datetime: '2014-08-27',
-    day: 'Monday',
-    time: '1-2pm', 
-    title: 'ePortfolio Student Showcase1',
-    theme: 'Engaging Learners',
-    sponsor: 'ATEL',
-    leader: 'Summers, Teggin',
-    location: 'TBD',
-    expanded: false, 
-    description: '"So did I, madam, and I am excessively disappointed.  The Carnatic, its repairs being completed, left Hong Kong twelve hours before the stated time, without any notice being given; and we must now wait a week for another steamer." As he said "a week" Fix felt his heart leap for joy.  Fogg detained at Hong Kong for a week!  There would be time for the warrant to arrive, and fortune at last favoured the representative of the law.  His horror may be imagined when he heard Mr. Fogg say, in his placid voice, "But there are other vessels besides the Carnatic, it seems',
-    credits: 1
+  $scope.registered = [];
+
+  $scope.offering = {};
+
+  var baseURL = '/api/attendance/';
+
+  var listUrl = baseURL+meetingId+'/';
+
+  var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  function parseResults (results) {
+    var parsed = [];
+    for (var i=0; i<results.length; i++) {
+      if (i==0) {
+        var date = new Date(results[i].meeting.start_time);
+        var endDate = new Date(results[i].meeting.end_time);
+        var minutes = date.getMinutes();
+        if (minutes<10) {
+          minutes = '0'+minutes;
+        }
+
+        var endMinutes = endDate.getMinutes();
+        if (endMinutes<10) {
+          endMinutes = '0'+endMinutes;
+        }
+        
+        var instructors = [];
+        for (var j=0; j<results[i].meeting.section.instructors.length; j++) {
+          instructors.push(results[i].meeting.section.instructors[j].first_name+' '+results[i].meeting.section.instructors[j].last_name);
+        }
+        var parsedLocation = 'N/A';
+        if (results[i].meeting.hasOwnProperty('location') && results[i].meeting.location != null && results[i].meeting.location.hasOwnProperty('building')) {
+          parsedLocation = results[i].meeting.location.building;
+          if (results[i].meeting.location.hasOwnProperty('room_number')) {
+            parsedLocation += ' ' + results[i].meeting.location.room_number;
+          }
+        }
+        attendanceCtrlScope.offering.date = months[date.getMonth()] + ' ' + date.getDate();
+        attendanceCtrlScope.offering.day = days[date.getDay()];
+        attendanceCtrlScope.offering.time = date.getHours() + ':' + minutes + '-' + endDate.getHours() + ':' + endMinutes;
+        attendanceCtrlScope.offering.title = results[i].meeting.section.course.title;
+        attendanceCtrlScope.offering.leaders = instructors;
+        attendanceCtrlScope.offering.location = parsedLocation;
+      }
+      var attendance = {
+        attendanceId: results[i].id,
+        firstName: results[i].user.first_name,
+        lastName: results[i].user.last_name,
+        attended: results[i].attended,
+      };
+      parsed.push(attendance);
+    }
+    return parsed;
+  }
+
+  function resultsSuccessCallback (data, status, headers, config) {
+    console.log(data);
+    attendanceCtrlScope.registered = attendanceCtrlScope.registered.concat(parseResults(data));
+    // for (var i=0; i<data.length; )
+    if (data.hasOwnProperty('next') && data.next != null && data.next.length>0) {
+      $http({method: 'GET', url: data.next}).
+        success(resultsSuccessCallback).
+        error(function(data, status, headers, config) {
+          console.log('FAIL!');
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+    }
+  }
+
+  $http({method: 'GET', url: listUrl}).
+    success(resultsSuccessCallback).
+    error(function(data, status, headers, config) {
+      console.log('FAIL!');
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+    });
+
+  $scope.toggleAttendance = function(person) {
+    person.attended = !person.attended;
+    var updateUrl = baseURL+person.attendanceId+'/';
+    $http.put(updateUrl, person.attended, {
+      url: updateUrl,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        "X-CSRFToken": $cookies.csrftoken
+      }, 
+      method: 'POST',
+      data: person.attended,
+      xsrfHeaderName: 'X-CSRFToken',
+      xsrfCookieName: 'csrftoken'
+    }).success(function(data){
+      console.log('attendance updated to ', person.attended);
+    }).error(function(){
+      console.log('failed to update attendance');
+    });
   };
 }]);

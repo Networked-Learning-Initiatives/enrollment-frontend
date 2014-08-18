@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="col-md-8 col-xs-12">
       <span class="quote pull-left">
-        &ldquo;Whatever you are, be a good one.&rdquo;<br/>Abraham Lincoln
+        &ldquo;Whatever you are, be a good one.&rdquo;<br/>Abraham Lincoln{{csrf}}
       </span>
       <span class="mission pull-left">
         We aim to help you improve your teaching, research, and service.
@@ -16,50 +16,71 @@
       </form>
     </div>
     <div class="col-md-4 xs-hidden">
-      <featured data="upcomingService.upcoming"></featured>
+      <featured year="year" semester="semester"></featured>
     </div>
   </div>      
 </div>
 <div class="container-fluid">
   <div class="row offerings">
     <table ng-table="tableParams" class="table table-striped-bodies table-hover-bodies">
-      <tbody ng-repeat="offering in $data" ng-click="select(offering)" id="{{offering.id}}">
+      <tbody ng-repeat="offering in $data" ng-click="select(offering.id)" id="{{offering.id}}">
         <tr>
-          <td data-title="'Date'" sortable="'datetime'">{{offering.date}}<br />{{offering.day}}<br />{{offering.time}}</td>
+          <td data-title="'Date'" sortable="'datetime'">{{offering.date}}<br />{{offering.day}}<br /><span ng-if="!offering.expanded">{{offering.time}}</span><span ng-if="offering.expanded">{{offering.longTime}}</span></td>
           <td data-title="'Title'" sortable="'title'">{{offering.title}}</td>
-          <td data-title="'Theme'" sortable="'theme'">{{offering.theme}}</td>
+          <td data-title="'Theme'" sortable="'theme'"><ul class="theme-list"><li ng-if="offering.themes.length==0">N/A</li><li ng-repeat="theme in offering.themes" class="theme"><img tooltip="{{theme.name}}" ng-src="/static/fe/images/themes/theme-{{theme.src}}.png" alt="{{theme.name}}"></li></ul></td>
           <td data-title="'Sponsor'" sortable="'sponsor'">{{offering.sponsor}}</td>
-          <td data-title="'Leader'" sortable="'leader'">{{offering.leader}}</td>
-          <td data-title="'Location'" sortable="'location'">{{offering.location}} <img src="/static/fe/images/webex.png" alt=""></td>
+          <td data-title="'Leader'" sortable="'leaders'"><ul class="leaders"><li ng-if="offering.leaders.length==0">N/A</li><li ng-repeat="leader in offering.leaders">{{leader}}</li></ul></td>
+          <td data-title="'Location'" sortable="'location'">{{offering.location}} <img ng-show="offering.maxOnline > 0 && offering.async=='Live'" class="webex" src="/static/fe/images/webex.png" alt=""></td>
+          <td data-title="'Online Format'" sortable="'async'">{{offering.async}}</td>
         </tr>
         <tr ng-class="{hidden:!offering.expanded}">
-          <td class="share-info" ng-click="share(offering)"><a href=""><i class="fa fa-share share"></i>share</a></td>
-          <td colspan="5">
+          <td class="credits">
+            Credits: {{offering.credits}}
+          </td>
+          <td>
             {{offering.description}}
           </td>
-        </tr>
-        <tr ng-class="{hidden:!offering.expanded}">
-          <td></td>
-          <td class="enrolled">
-            <button class="btn btn-lg btn-primary pull-left">Enroll</button>
-            <div class="seats pull-left">
+          <td class="enrolled" colspan="3">
+            
+            <button ng-class="{disabled:disableEnroll(offering)}" ng-show="showEnroll(offering) && userService.loggedIn()" class="btn btn-lg btn-primary pull-left" ng-click="enroll(offering, false, false)">Enroll</button>
+
+            <a ng-href="/api/login/?return_path={{window.location.origin+'#/enrollment/'+'enroll/'+offering.id+'/false/false'}}" class="btn btn-lg btn-primary pull-left" ng-class="{disabled:disableEnroll(offering)}" ng-show="showEnroll(offering) && !userService.loggedIn()">Enroll <i class="fa fa-lock"></i></a>
+            
+            <button ng-class="{disabled:disableJoinWaitlist(offering)}" ng-show="showJoinWaitlist(offering) && userService.loggedIn()" class="btn btn-lg btn-primary pull-left" ng-click="enroll(offering, false, true)">Join Waitlist</button>
+
+            <a ng-href="/api/login/?return_path={{window.location.origin+'#/enrollment/'+'enroll/'+offering.id+'/false/true'}}" ng-class="{disabled:disableJoinWaitlist(offering)}" ng-show="showJoinWaitlist(offering) && !userService.loggedIn()" class="btn btn-lg btn-primary pull-left" ng-click="enroll(offering, false, true)">Join Waitlist <i class="fa fa-lock"></i></a>
+            
+            <button ng-show="showUnenroll(offering)" class="btn btn-lg btn-primary pull-left" ng-click="unenroll(offering)">Unenroll</button>
+            
+            <button ng-show="showLeaveWaitlist(offering)" class="btn btn-lg btn-primary pull-left" ng-click="unenroll(offering)">Leave Waitlist</button>
+            
+            <div class="seats">
               <ul>
-                <li class="seats-enrolled">13 enrolled</li>
-                <li class="seats-available">2 seats available</li>
+                <li class="seats-enrolled">{{offering.enrolledPhysically}} enrolled</li>
+                <li class="seats-available">{{seatsAvailable(offering)}} seats available</li>
               </ul>
-              </div>
-          </td>
-          <td colspan="2" class="enrolled">
-            <button class="btn btn-lg btn-primary pull-left">Enroll in WebEx</button>
-            <div class="seats pull-left">
-            <ul>
-                <li class="seats-enrolled">13 enrolled</li>
-                <li class="seats-available">6 seats available</li>
-            </ul>
             </div>
           </td>
-          <td colspan="2" class="credits">
-            Credits: {{offering.credits}}
+          <td colspan="2" class="enrolled">
+            
+            <button ng-class="{disabled:disableEnrollOnline(offering)}" ng-show="showEnrollOnline(offering) && userService.loggedIn()" class="btn btn-lg btn-primary pull-left" ng-click="enroll(offering, true, false)">Enroll Online</button>
+
+            <a ng-href="/api/login/?return_path={{window.location.origin+'#/enrollment/'+'enroll/'+offering.id+'/true/false'}}" ng-class="{disabled:disableEnrollOnline(offering)}" ng-show="showEnrollOnline(offering) && !userService.loggedIn()" class="btn btn-lg btn-primary pull-left" ng-click="enroll(offering, true, false)">Enroll Online <i class="fa fa-lock" ng-hide="userService.loggedIn()"></i></a>
+            
+            <button ng-class="{disabled:disableJoinWaitlistOnline(offering)}" ng-show="showJoinWaitlistOnline(offering) && userService.loggedIn()" class="btn btn-lg btn-primary pull-left" ng-click="enroll(offering, true, true)">Join Online Waitlist</button>
+
+            <a ng-href="/api/login/?return_path={{window.location.origin+'#/enrollment/'+'enroll/'+offering.id+'/true/true'}}" ng-class="{disabled:disableJoinWaitlistOnline(offering)}" ng-show="showJoinWaitlistOnline(offering) && !userService.loggedIn()" class="btn btn-lg btn-primary pull-left" ng-click="enroll(offering, true, true)">Join Online Waitlist <i class="fa fa-lock" ng-hide="userService.loggedIn()"></i></a>
+            
+            <button ng-show="showUnenrollOnline(offering)" class="btn btn-lg btn-primary pull-left" ng-click="unenroll(offering)">Unenroll from Online</button>
+            
+            <button ng-show="showLeaveWaitlistOnline(offering)" class="btn btn-lg btn-primary pull-left" ng-click="unenroll(offering)">Leave Online Waitlist</button>
+            
+            <div class="seats">
+              <ul>
+                <li class="seats-enrolled">{{offering.enrolledOnline}} enrolled online</li>
+                <li class="seats-available">{{seatsAvailableOnline(offering)}} seats available online</li>
+              </ul>
+            </div>
           </td>
         </tr>
       </tbody>
